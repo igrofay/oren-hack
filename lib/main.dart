@@ -39,12 +39,6 @@ final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
-      path: '/adminScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return AdminPanelScreen();
-      },
-    ),
-    GoRoute(
       path: '/detailedCampScreen',
       builder: (BuildContext context, GoRouterState state) {
         return DetailedCampScreen();
@@ -59,7 +53,9 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return WelcomeScreen(coreApp: getIt.get(),);
+        return WelcomeScreen(
+          coreApp: getIt.get(),
+        );
       },
     ),
     GoRoute(
