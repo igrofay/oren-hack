@@ -183,12 +183,16 @@ class ParentProfileScreen extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       height: visible ? null : 0,
       child: SfDateRangePicker(
+        selectionColor: Colors.amber,
+        todayHighlightColor: Colors.transparent,
         monthCellStyle: const DateRangePickerMonthCellStyle(
+            todayTextStyle: TextStyle(color: Colors.white70),
             textStyle: TextStyle(color: Colors.white70)),
         yearCellStyle: const DateRangePickerYearCellStyle(
             textStyle: TextStyle(color: Colors.white)),
         headerStyle: const DateRangePickerHeaderStyle(
-            textStyle: TextStyle(color: Colors.white)),
+            textStyle:
+                TextStyle(color: Colors.white, decorationColor: Colors.white)),
         monthViewSettings: const DateRangePickerMonthViewSettings(
             viewHeaderStyle: DateRangePickerViewHeaderStyle(
                 textStyle: TextStyle(color: Colors.white)),
