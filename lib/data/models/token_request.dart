@@ -6,12 +6,12 @@ part 'token_request.g.dart';
 class TokenRequest {
 
   String grandType;
-  String refreshToken;
-  String username;
-  String password;
+  String? refreshToken;
+  String? username;
+  String? password;
 
 
-  TokenRequest(this.grandType, this.refreshToken, this.username, this.password);
+  TokenRequest(this.grandType, [this.refreshToken, this.username, this.password]);
 
   factory TokenRequest.fromJson(Map<String, dynamic> json) =>
       _$TokenRequestFromJson(json);

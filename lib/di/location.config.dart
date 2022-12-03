@@ -54,6 +54,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i12.RestoreSessionUseCase>(_i12.RestoreSessionUseCase(
       gh<_i10.AuthRepos>(),
       gh<_i6.TokenRepos>(),
+      gh<_i3.CoreApp>(),
     ));
     return this;
   }

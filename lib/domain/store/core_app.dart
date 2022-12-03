@@ -11,5 +11,5 @@ class CoreApp = _CoreApp with _$CoreApp;
 abstract class _CoreApp with Store {
 
   @observable
-  UserStateApp stateApp = UserStateApp.noAuthorized;
+  UserStateApp userStateApp = UserStateApp.noAuthorized;
 }
