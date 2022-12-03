@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dooking/data/models/token_request.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../models/Parent.dart';
+import '../models/parent.dart';
 import '../models/child.dart';
 import '../models/token_set.dart';
 

@@ -7,4 +7,4 @@ import 'location.config.dart';
 final getIt = GetIt.instance;
 
 @InjectableInit()
-void configureDependencies() async => getIt.init();
+void configureDependencies() async => await getIt.init();

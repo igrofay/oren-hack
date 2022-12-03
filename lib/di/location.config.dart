@@ -10,10 +10,11 @@ import 'package:dooking/data/data_source/data_source.dart' as _i4;
 import 'package:dooking/data/data_source/rest_client.dart' as _i9;
 import 'package:dooking/data/repos/auth_impl.dart' as _i11;
 import 'package:dooking/data/repos/token_impl.dart' as _i7;
-import 'package:dooking/di/register_module_data_source.dart' as _i12;
+import 'package:dooking/di/register_module_data_source.dart' as _i13;
 import 'package:dooking/domain/repos/auth.dart' as _i10;
 import 'package:dooking/domain/repos/token.dart' as _i6;
 import 'package:dooking/domain/store/core_app.dart' as _i3;
+import 'package:dooking/domain/use_case/restore_session.dart' as _i12;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i5;
@@ -50,8 +51,12 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i9.RestClient>(
         regModuleDataSource.getRestClient(gh<_i8.Dio>()));
     gh.factory<_i10.AuthRepos>(() => _i11.AuthReposImpl(gh<_i9.RestClient>()));
+    gh.singleton<_i12.RestoreSessionUseCase>(_i12.RestoreSessionUseCase(
+      gh<_i10.AuthRepos>(),
+      gh<_i6.TokenRepos>(),
+    ));
     return this;
   }
 }
 
-class _$RegModuleDataSource extends _i12.RegModuleDataSource {}
+class _$RegModuleDataSource extends _i13.RegModuleDataSource {}

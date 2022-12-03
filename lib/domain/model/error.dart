@@ -1,0 +1,3 @@
+
+
+class ConnectionError implements Exception{}
