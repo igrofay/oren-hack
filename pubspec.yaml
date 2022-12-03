@@ -47,6 +47,9 @@ dependencies:
   flutter_svg: ^1.1.6
   auto_size_text: ^3.0.0
   syncfusion_flutter_datepicker: ^20.3.59
+  auto_route: ^5.0.4
+  auto_route_generator: ^5.0.3
+  go_router: ^5.2.1
 
 dev_dependencies:
   retrofit_generator: '>=4.0.0 <5.0.0'
