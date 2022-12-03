@@ -1,3 +1,6 @@
+import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
+import 'package:dooking/presentation/login_screen/LoginScreen.dart';
+import 'package:dooking/presentation/registration_screen/RegistrationScreen.dart';
 import 'package:dooking/presentation/welcome_screen/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Montserrat",
       ),
-      home: WelcomeScreen(),
+      home: CitizenRfScreen(),
     );
   }
 }

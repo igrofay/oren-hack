@@ -3,9 +3,11 @@ import 'package:dooking/res/images.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundScaffold extends StatelessWidget {
-  BackgroundScaffold({Key? key, required this.child}) : super(key: key);
+  BackgroundScaffold({Key? key, required this.child, this.back})
+      : super(key: key);
 
   Widget child;
+  String? back;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,9 @@ class BackgroundScaffold extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(horizontal: 40),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(MainBackgroundImage),
+            image: AssetImage(back ?? MainBackgroundImage),
             fit: BoxFit.cover,
           ),
         ),

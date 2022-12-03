@@ -37,13 +37,13 @@ class CustomTextField extends StatelessWidget {
       width: width,
       margin: EdgeInsets.only(bottom: bottomMargin),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(12),
         border: isError
             ? Border.all(color: Colors.redAccent)
             : stroke
                 ? Border.all(color: Colors.white24, width: 2)
                 : null,
-        color: const Color(0x2442486B),
+        color: Colors.white24,
       ),
       child: Center(
         child: TextFormField(
@@ -70,7 +70,7 @@ class CustomTextField extends StatelessWidget {
               hintText: hintText,
               hintMaxLines: 1,
               hintStyle: const TextStyle(
-                  color: Colors.white12, fontWeight: FontWeight.w400)),
+                  color: Colors.white30, fontWeight: FontWeight.w400)),
         ),
       ),
     );
