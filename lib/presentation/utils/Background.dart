@@ -3,15 +3,16 @@ import 'package:dooking/res/images.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundScaffold extends StatelessWidget {
-  BackgroundScaffold({Key? key, required this.child, this.back})
+  BackgroundScaffold({Key? key, required this.child, this.back, this.appBar})
       : super(key: key);
-
+  AppBar? appBar;
   Widget child;
   String? back;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar,
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,

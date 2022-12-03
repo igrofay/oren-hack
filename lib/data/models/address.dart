@@ -11,8 +11,8 @@ class Address {
   String city;
   String street;
   String numberOfHouse;
-  String corpus;
-  String apartment;
+  String? corpus;
+  String? apartment;
 
   Address(this.index, this.country, this.region, this.district, this.city,
       this.street, this.numberOfHouse, this.corpus, this.apartment);
