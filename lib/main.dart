@@ -41,7 +41,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return CampsScreen();
+        return AdminPanelScreen();
       },
     ),
     GoRoute(

@@ -20,7 +20,7 @@ class CampItem extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(4)
         ),
-        height: 560,
+        height: 320,
         margin: EdgeInsets.only(bottom: 16),
         child: Stack(
           children: [
