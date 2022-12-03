@@ -6,10 +6,14 @@ import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../domain/store/session/sign_up.dart';
+
 class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({super.key});
+  final SignUp signUp;
+  const RegistrationScreen({super.key,required this.signUp});
 
   @override
   Widget build(BuildContext context) {
@@ -66,21 +70,38 @@ class RegistrationScreen extends StatelessWidget {
                                 child: Text(
                                   "Или войдите в аккаунт!",
                                   style: defaultTextStyle(
-                                      size: 18,
+                                      size: 16,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white70),
                                 ),
                               ),
                               kDefaultVerticalPadding,
-                              CustomTextField(hintText: "E-mail"),
+                              Observer(
+                                builder: (context) {
+                                  return CustomTextField(
+                                    hintText: "E-mail",
+                                    onChanged: signUp.setEmail,
+                                    isError: signUp.isErrorEmail,
+                                  );
+                                }
+                              ),
                               kDefaultVerticalPadding,
-                              CustomTextField(hintText: "Пароль"),
+                              Observer(
+                                builder: (context) {
+                                  return CustomTextField(
+                                    hintText: "Пароль",
+                                    isPassword: true,
+                                    onChanged: signUp.setPassword,
+                                    isError: signUp.isErrorPassword,
+                                  );
+                                }
+                              ),
                               kDefaultVerticalPadding,
                               CustomButton(
                                 buttonColor: Colors.white,
                                 textColor: primary,
                                 text: "Зарегистрироваться",
-                                onPressed: () {},
+                                onPressed: signUp.registration,
                               ),
                               kDefaultVerticalPadding,
                               Row(
@@ -95,25 +116,46 @@ class RegistrationScreen extends StatelessWidget {
                                         color: Colors.transparent,
                                         border:
                                             Border.all(color: Colors.white70)),
-                                    child: Checkbox(
-                                        fillColor: MaterialStateProperty.all(
-                                            Colors.transparent),
-                                        value: true,
-                                        onChanged: (value) {}),
+                                    child: Observer(
+                                      builder: (context) {
+                                        return Checkbox(
+                                            fillColor: MaterialStateProperty.all(
+                                                Colors.transparent),
+                                            value: signUp.isOrganization,
+                                            onChanged: (_)=> signUp.changeIsOrganization()
+                                        );
+                                      }
+                                    ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: kDefaultHorizontalPaddingValue / 2,
                                   ),
                                   Text(
                                     "я организация",
                                     style: defaultTextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white70)
-                                        .copyWith(
-                                            decoration:
-                                                TextDecoration.underline),
+                                            color: Colors.white),
                                   )
                                 ],
+                              ),
+                              kDefaultVerticalPadding,
+                              Observer(
+                                  builder: (context) {
+                                    if(signUp.errorMessage != null){
+                                      return Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                              signUp.errorMessage!,
+                                              style: defaultTextStyle(fontWeight: FontWeight.bold, color: Colors.white)
+                                          )
+                                        ],
+                                      );
+                                    }else{
+                                      return const SizedBox();
+                                    }
+                                  }
                               )
                             ],
                           ),

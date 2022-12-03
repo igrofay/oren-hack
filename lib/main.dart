@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Montserrat",
       ),
-      home: LoginScreen(signIn: getIt.get(),),
+      home: RegistrationScreen(signUp: getIt.get(),),
     );
   }
 }
