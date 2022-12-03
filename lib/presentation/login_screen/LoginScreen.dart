@@ -88,28 +88,11 @@ class LoginScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.transparent,
-                                        border:
-                                            Border.all(color: Colors.white70)),
-                                    child: Checkbox(
-                                        fillColor: MaterialStateProperty.all(
-                                            Colors.transparent),
-                                        value: true,
-                                        onChanged: (value) {}),
-                                  ),
-                                  SizedBox(
-                                    width: kDefaultHorizontalPaddingValue / 2,
-                                  ),
                                   Text(
-                                    "я организация",
+                                    "тут ошибка",
                                     style: defaultTextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white70)
+                                            color: Colors.redAccent)
                                         .copyWith(
                                             decoration:
                                                 TextDecoration.underline),
