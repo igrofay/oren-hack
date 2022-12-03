@@ -12,13 +12,13 @@ mixin _$CoreApp on _CoreApp, Store {
   late final _$stateAppAtom = Atom(name: '_CoreApp.stateApp', context: context);
 
   @override
-  StateApp get stateApp {
+  UserStateApp get stateApp {
     _$stateAppAtom.reportRead();
     return super.stateApp;
   }
 
   @override
-  set stateApp(StateApp value) {
+  set stateApp(UserStateApp value) {
     _$stateAppAtom.reportWrite(value, super.stateApp, () {
       super.stateApp = value;
     });
