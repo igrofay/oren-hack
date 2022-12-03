@@ -46,3 +46,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+pubspec.lock
+pubspec.lock
+pubspec.lock
+.dart_tool/package_config_subset
+.dart_tool/package_config.json
+.dart_tool/version
+build/c075001b96339384a97db4862b8ab8db.cache.dill.track.dill
+build/flutter_assets/shaders/ink_sparkle.frag
