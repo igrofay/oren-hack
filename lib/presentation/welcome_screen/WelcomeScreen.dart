@@ -135,8 +135,6 @@ class Header extends StatelessWidget {
         children: [
           Text("Лагеря", style: defaultTextStyle()),
           kDefaultHorizontalPadding,
-          Text("Дети", style: defaultTextStyle()),
-          kDefaultHorizontalPadding,
           Text("Профиль", style: defaultTextStyle()),
         ],
       ),
