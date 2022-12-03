@@ -7,7 +7,6 @@ import 'package:dooking/presentation/organization_profile_screen/OrganizationPro
 import 'package:dooking/presentation/parent_profile_screen/ParentProfileScreen.dart';
 import 'package:dooking/presentation/registration_screen/RegistrationScreen.dart';
 import 'package:dooking/presentation/welcome_screen/WelcomeScreen.dart';
-import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,7 +38,7 @@ final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
-      path: '/',
+      path: '/camps',
       builder: (BuildContext context, GoRouterState state) {
         return AdminPanelScreen();
       },
@@ -51,9 +50,9 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/welcomeScreen',
+      path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return WelcomeScreen();
+        return WelcomeScreen(coreApp: getIt.get(),);
       },
     ),
     GoRoute(

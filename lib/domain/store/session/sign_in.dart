@@ -5,7 +5,6 @@ import 'package:dooking/domain/utils/regular_expressions.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../model/user_state_app.dart';
 import '../../repos/token.dart';
 import '../app/core_app.dart';
 
@@ -17,9 +16,9 @@ class SignIn = _SignIn with _$SignIn;
 abstract class _SignIn with Store{
   final AuthRepos _authRepos;
   final TokenRepos _tokenRepos;
-  final CoreApp _coreApp;
+  final CoreApp coreApp;
 
-  _SignIn(this._authRepos, this._tokenRepos, this._coreApp);
+  _SignIn(this._authRepos, this._tokenRepos, this.coreApp);
 
   String _email = "";
   String _password = "";
@@ -65,8 +64,7 @@ abstract class _SignIn with Store{
       _tokenRepos
         ..setAccess(tokenSet.accessToken)
         ..setRefresh(tokenSet.refreshToken);
-      final UserStateApp state = UserStateApp.values.singleWhere((element) => element.name == tokenSet.userType);
-      _coreApp.userStateApp = state;
+      coreApp.userStateApp = tokenSet.userState;
     }on DioError catch(e){
       errorMessage = e.response?.data?.toString();
     }

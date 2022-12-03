@@ -1,3 +1,4 @@
+
 import 'package:dooking/domain/model/user_state_app.dart';
 
 class TokenDomainBean{

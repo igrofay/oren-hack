@@ -1,3 +1,4 @@
+import 'package:dooking/domain/model/user_state_app.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
 import 'package:dooking/res/constants.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobx/mobx.dart';
 
 import '../../domain/store/session/sign_up.dart';
 
@@ -17,7 +20,16 @@ class RegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ReactionBuilder(
+      builder:(_)=> reaction(
+              (_) => signUp.coreApp.userStateApp,
+              (state) {
+                if(state != UserStateApp.noAuthorized){
+                  context.push('/organizationProfileScreen');
+                }
+              }
+      ),
+      child: Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -77,24 +89,24 @@ class RegistrationScreen extends StatelessWidget {
                               ),
                               kDefaultVerticalPadding,
                               Observer(
-                                builder: (context) {
-                                  return CustomTextField(
-                                    hintText: "E-mail",
-                                    onChanged: signUp.setEmail,
-                                    isError: signUp.isErrorEmail,
-                                  );
-                                }
+                                  builder: (context) {
+                                    return CustomTextField(
+                                      hintText: "E-mail",
+                                      onChanged: signUp.setEmail,
+                                      isError: signUp.isErrorEmail,
+                                    );
+                                  }
                               ),
                               kDefaultVerticalPadding,
                               Observer(
-                                builder: (context) {
-                                  return CustomTextField(
-                                    hintText: "Пароль",
-                                    isPassword: true,
-                                    onChanged: signUp.setPassword,
-                                    isError: signUp.isErrorPassword,
-                                  );
-                                }
+                                  builder: (context) {
+                                    return CustomTextField(
+                                      hintText: "Пароль",
+                                      isPassword: true,
+                                      onChanged: signUp.setPassword,
+                                      isError: signUp.isErrorPassword,
+                                    );
+                                  }
                               ),
                               kDefaultVerticalPadding,
                               CustomButton(
@@ -115,16 +127,16 @@ class RegistrationScreen extends StatelessWidget {
                                         shape: BoxShape.circle,
                                         color: Colors.transparent,
                                         border:
-                                            Border.all(color: Colors.white70)),
+                                        Border.all(color: Colors.white70)),
                                     child: Observer(
-                                      builder: (context) {
-                                        return Checkbox(
-                                            fillColor: MaterialStateProperty.all(
-                                                Colors.transparent),
-                                            value: signUp.isOrganization,
-                                            onChanged: (_)=> signUp.changeIsOrganization()
-                                        );
-                                      }
+                                        builder: (context) {
+                                          return Checkbox(
+                                              fillColor: MaterialStateProperty.all(
+                                                  Colors.transparent),
+                                              value: signUp.isOrganization,
+                                              onChanged: (_)=> signUp.changeIsOrganization()
+                                          );
+                                        }
                                     ),
                                   ),
                                   const SizedBox(
@@ -133,8 +145,8 @@ class RegistrationScreen extends StatelessWidget {
                                   Text(
                                     "я организация",
                                     style: defaultTextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
                                   )
                                 ],
                               ),
@@ -165,6 +177,7 @@ class RegistrationScreen extends StatelessWidget {
           ],
         ),
       ),
+    )
     );
   }
 }

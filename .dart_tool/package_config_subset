@@ -14,6 +14,14 @@ async
 2.14
 file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/
 file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.9.0/lib/
+auto_route
+2.17
+file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_route-5.0.4/
+file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_route-5.0.4/lib/
+auto_route_generator
+2.17
+file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_route_generator-5.0.3/
+file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_route_generator-5.0.3/lib/
 auto_size_text
 2.12
 file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text-3.0.0/
@@ -134,6 +142,10 @@ glob
 2.15
 file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.1.1/
 file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.1.1/lib/
+go_router
+2.17
+file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/go_router-5.2.1/
+file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/go_router-5.2.1/lib/
 graphs
 2.12
 file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/graphs-2.2.0/

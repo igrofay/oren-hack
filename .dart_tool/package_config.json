@@ -26,6 +26,18 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "auto_route",
+      "rootUri": "file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_route-5.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "auto_route_generator",
+      "rootUri": "file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_route_generator-5.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "auto_size_text",
       "rootUri": "file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text-3.0.0",
       "packageUri": "lib/",
@@ -222,6 +234,12 @@
       "rootUri": "file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "go_router",
+      "rootUri": "file:///Library/flutter/.pub-cache/hosted/pub.dartlang.org/go_router-5.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "graphs",
@@ -626,7 +644,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-03T06:01:59.712496Z",
+  "generated": "2022-12-03T10:30:33.963459Z",
   "generator": "pub",
   "generatorVersion": "2.18.4"
 }

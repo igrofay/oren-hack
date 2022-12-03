@@ -26,8 +26,7 @@ class RestoreSessionUseCase{
       _tokenRepos
         ..setAccess(tokenSet.accessToken)
         ..setRefresh(tokenSet.refreshToken);
-      final UserStateApp state = UserStateApp.values.singleWhere((element) => element.name == tokenSet.userType);
-      runInAction(() => _coreApp.userStateApp = state);
+      runInAction(() => _coreApp.userStateApp = tokenSet.userState);
       return true;
     }on DioError catch (e) {
       switch (e.response?.statusCode) {

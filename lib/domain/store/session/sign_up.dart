@@ -16,9 +16,9 @@ class SignUp = _SignUp with _$SignUp;
 abstract class _SignUp with Store {
   final AuthRepos _authRepos;
   final TokenRepos _tokenRepos;
-  final CoreApp _coreApp;
+  final CoreApp coreApp;
 
-  _SignUp(this._authRepos, this._tokenRepos, this._coreApp);
+  _SignUp(this._authRepos, this._tokenRepos, this.coreApp);
 
 
   String _email = "";

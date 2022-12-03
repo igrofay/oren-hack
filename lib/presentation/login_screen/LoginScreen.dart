@@ -9,6 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobx/mobx.dart';
+
+import '../../domain/model/user_state_app.dart';
 
 class LoginScreen extends StatelessWidget {
   final SignIn signIn;
@@ -16,7 +20,16 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ReactionBuilder(
+        builder:(_)=> reaction(
+                (_) => signIn.coreApp.userStateApp,
+                (state) {
+              if(state != UserStateApp.noAuthorized){
+                context.push('/parentProfileScreen');
+              }
+            }
+        ),
+        child: Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -104,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       Text(signIn.errorMessage!,
                                           style: defaultTextStyle(
@@ -124,6 +137,7 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
+    )
     );
   }
 }
