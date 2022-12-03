@@ -11,22 +11,32 @@ class CitizenRfScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundScaffold(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          "Вы гражданин РФ?",
-          style: defaultTextStyle(fontWeight: FontWeight.bold, size: 24),
-        ),
-        kDefaultVerticalPadding,
-        CustomButton(text: "Да", buttonColor: Colors.white, textColor: primary),
-        kDefaultVerticalPadding,
-        CustomButton(
-            text: "Нет",
+        child: SizedBox(
+      width: 500,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "Вы гражданин РФ?",
+            style: defaultTextStyle(fontWeight: FontWeight.bold, size: 24),
+          ),
+          kDefaultVerticalPadding,
+          CustomButton(
+            buttonColor: Colors.white,
+            textColor: primary,
+            text: "Да",
+            onPressed: () {},
+          ),
+          kDefaultVerticalPadding,
+          CustomButton(
             buttonColor: Colors.transparent,
-            textColor: Colors.white),
-      ],
+            textColor: Colors.white,
+            text: "Нет",
+            onPressed: () {},
+          ),
+        ],
+      ),
     ));
   }
 }
