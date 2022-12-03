@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'person.dart';
+part of 'parent.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Person _$PersonFromJson(Map<String, dynamic> json) => Person(
+Parent _$ParentFromJson(Map<String, dynamic> json) => Parent(
       json['firstName'] as String,
       json['secondName'] as String,
       json['lastName'] as String,
       json['parentStatus'] as String,
       json['citizenCountry'] as String,
       json['birthday'] as String,
-      json['passport'],
+      Passport.fromJson(json['passport'] as Map<String, dynamic>),
       Address.fromJson(json['address'] as Map<String, dynamic>),
       json['snils'] as String,
       json['phoneNumber'] as String,
@@ -21,7 +21,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       (json['childs'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
+Map<String, dynamic> _$ParentToJson(Parent instance) => <String, dynamic>{
       'firstName': instance.firstName,
       'secondName': instance.secondName,
       'lastName': instance.lastName,

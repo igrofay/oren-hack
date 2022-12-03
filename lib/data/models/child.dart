@@ -1,42 +1,40 @@
-import 'package:dooking/data/models/Person.dart';
+import 'package:dooking/data/models/birth_certificate.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'Passport.dart';
+import 'passport.dart';
 import 'address.dart';
 
-part 'person.g.dart';
+part 'child.g.dart';
 
 @JsonSerializable()
-class Person {
+class Child {
   String firstName;
   String secondName;
   String lastName;
-  String parentStatus;
   String citizenCountry;
   String birthday;
   Passport passport;
+  BirthCertificate birthCertificate;
   Address address;
   String snils;
   String phoneNumber;
   String email;
-  List<String> childs;
 
 
-  Person(
+  Child(
       this.firstName,
       this.secondName,
       this.lastName,
-      this.parentStatus,
       this.citizenCountry,
       this.birthday,
       this.passport,
+      this.birthCertificate,
       this.address,
       this.snils,
       this.phoneNumber,
-      this.email,
-      this.childs);
+      this.email);
 
-  factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
+  factory Child.fromJson(Map<String, dynamic> json) => _$ChildFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PersonToJson(this);
+  Map<String, dynamic> toJson() => _$ChildToJson(this);
 }

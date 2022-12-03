@@ -5,31 +5,29 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Singleton(as: TokenRepos)
-class TokenReposImpl implements TokenRepos{
+class TokenReposImpl implements TokenRepos {
   final SharedPreferences _sharedPreferences;
 
   TokenReposImpl(this._sharedPreferences);
 
-  @override
-  String getAccess() {
-    // TODO: implement getAccess
-    throw UnimplementedError();
-  }
+  static const String _accessTokenKey = "ACCESS_TOKEN_KEY";
+  static const String _refreshTokenKey = "ACCESS_TOKEN_KEY";
 
   @override
-  String getRefresh() {
-    // TODO: implement getRefresh
-    throw UnimplementedError();
-  }
+  String getAccess() => _sharedPreferences.getString(_accessTokenKey) ?? '';
+
+
+  @override
+  String getRefresh() => _sharedPreferences.getString(_refreshTokenKey) ?? '';
 
   @override
   void setAccess(String access) {
-    // TODO: implement setAccess
+    _sharedPreferences.setString(_accessTokenKey, access);
   }
 
   @override
   void setRefresh(String refresh) {
-    // TODO: implement setRefresh
+    _sharedPreferences.setString(_refreshTokenKey, refresh);
   }
 
 }
