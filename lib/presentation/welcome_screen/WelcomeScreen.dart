@@ -3,6 +3,7 @@ import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -109,14 +110,24 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Зарегистрироваться",
-            style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
+          CupertinoButton(
+            onPressed: () {},
+            padding: EdgeInsets.zero,
+            minSize: 0,
+            child: Text(
+              "Зарегистрироваться",
+              style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            "Или войдите в аккаунт",
-            style: defaultTextStyle(size: 13, fontWeight: FontWeight.bold)
-                .copyWith(decoration: TextDecoration.underline),
+          CupertinoButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {},
+            minSize: 0,
+            child: Text(
+              "Или войдите в аккаунт",
+              style: defaultTextStyle(size: 13, fontWeight: FontWeight.bold)
+                  .copyWith(decoration: TextDecoration.underline),
+            ),
           ),
         ],
       ),
@@ -133,9 +144,17 @@ class Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Лагеря", style: defaultTextStyle()),
+          CupertinoButton(
+              onPressed: () {},
+              minSize: 0,
+              padding: EdgeInsets.zero,
+              child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
-          Text("Профиль", style: defaultTextStyle()),
+          CupertinoButton(
+              onPressed: () {},
+              minSize: 0,
+              padding: EdgeInsets.zero,
+              child: Text("Профиль", style: defaultTextStyle())),
         ],
       ),
     );
