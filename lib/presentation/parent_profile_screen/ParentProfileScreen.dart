@@ -7,6 +7,7 @@ import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -21,6 +22,10 @@ class ParentProfileScreen extends StatelessWidget {
       child: Column(
         children: [
           Header(),
+          Text(
+            "Профиль родителя",
+            style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
+          ),
           Flex(
             crossAxisAlignment: CrossAxisAlignment.start,
             direction: Axis.horizontal,
@@ -211,7 +216,88 @@ class ParentProfileScreen extends StatelessWidget {
   }
 }
 
-Widget Header() {
+class Header extends StatelessWidget {
+  const Header({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin:
+          const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue),
+      height: HEIGHT,
+      child: Stack(
+        children: [sun(), nav(), reg()],
+      ),
+    );
+  }
+
+  Widget reg() {
+    return Positioned(
+      top: 0,
+      bottom: 0,
+      right: 0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CupertinoButton(
+            onPressed: () {},
+            padding: EdgeInsets.zero,
+            minSize: 0,
+            child: Text(
+              "Зарегистрироваться",
+              style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          CupertinoButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {},
+            minSize: 0,
+            child: Text(
+              "Или войдите в аккаунт",
+              style: defaultTextStyle(size: 13, fontWeight: FontWeight.bold)
+                  .copyWith(decoration: TextDecoration.underline),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget nav() {
+    return Positioned(
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CupertinoButton(
+              onPressed: () {},
+              minSize: 0,
+              padding: EdgeInsets.zero,
+              child: Text("Лагеря", style: defaultTextStyle())),
+          kDefaultHorizontalPadding,
+          CupertinoButton(
+              onPressed: () {},
+              minSize: 0,
+              padding: EdgeInsets.zero,
+              child: Text("Дети", style: defaultTextStyle())),
+          kDefaultHorizontalPadding,
+          CupertinoButton(
+              onPressed: () {},
+              minSize: 0,
+              padding: EdgeInsets.zero,
+              child: Text("Профиль", style: defaultTextStyle())),
+        ],
+      ),
+    );
+  }
+
   Widget sun() {
     return Positioned(
       top: 0,
@@ -242,21 +328,4 @@ Widget Header() {
       ),
     );
   }
-
-  return Container(
-    margin:
-        const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue * 2),
-    height: HEIGHT,
-    child: Stack(
-      children: [
-        sun(),
-        Positioned.fill(
-            child: Center(
-                child: Text(
-          "Профиль родителя",
-          style: defaultTextStyle(fontWeight: FontWeight.bold, size: 24),
-        )))
-      ],
-    ),
-  );
 }
