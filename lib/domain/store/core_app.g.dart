@@ -9,25 +9,26 @@ part of 'core_app.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CoreApp on _CoreApp, Store {
-  late final _$stateAppAtom = Atom(name: '_CoreApp.stateApp', context: context);
+  late final _$userStateAppAtom =
+      Atom(name: '_CoreApp.userStateApp', context: context);
 
   @override
-  UserStateApp get stateApp {
-    _$stateAppAtom.reportRead();
-    return super.stateApp;
+  UserStateApp get userStateApp {
+    _$userStateAppAtom.reportRead();
+    return super.userStateApp;
   }
 
   @override
-  set stateApp(UserStateApp value) {
-    _$stateAppAtom.reportWrite(value, super.stateApp, () {
-      super.stateApp = value;
+  set userStateApp(UserStateApp value) {
+    _$userStateAppAtom.reportWrite(value, super.userStateApp, () {
+      super.userStateApp = value;
     });
   }
 
   @override
   String toString() {
     return '''
-stateApp: ${stateApp}
+userStateApp: ${userStateApp}
     ''';
   }
 }
