@@ -1,4 +1,4 @@
 
-mixin AuthRepos{
+abstract class AuthRepos{
 
 }
