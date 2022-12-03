@@ -110,7 +110,7 @@ class ParentProfileScreen extends StatelessWidget {
               )),
             ],
           ),
-          calendar(true),
+          calendar(true, (_) {}),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Кем выдан",
@@ -175,7 +175,7 @@ class ParentProfileScreen extends StatelessWidget {
               )),
             ],
           ),
-          calendar(true),
+          calendar(true, (_) {}),
           kDefaultVerticalPadding,
           CustomTextField(hintText: "Номер телефона")
         ],
@@ -183,7 +183,8 @@ class ParentProfileScreen extends StatelessWidget {
     ));
   }
 
-  AnimatedContainer calendar(bool visible) {
+  AnimatedContainer calendar(bool visible,
+      Function(DateRangePickerSelectionChangedArgs)? onSelectionChanged) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: visible ? null : 0,
@@ -205,7 +206,7 @@ class ParentProfileScreen extends StatelessWidget {
                 textStyle: TextStyle(color: Colors.white))),
         rangeTextStyle: const TextStyle(color: Colors.white),
         selectionTextStyle: const TextStyle(color: Colors.white),
-        onSelectionChanged: (_) {},
+        onSelectionChanged: onSelectionChanged,
         selectionMode: DateRangePickerSelectionMode.single,
         initialSelectedDate: DateTime.now(),
         // initialSelectedRange: PickerDateRange(
