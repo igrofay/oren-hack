@@ -1,3 +1,4 @@
+import 'package:dooking/presentation/admin/AdminPanelScreen.dart';
 import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
 import 'package:dooking/presentation/login_screen/LoginScreen.dart';
 import 'package:dooking/presentation/registration_screen/RegistrationScreen.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Montserrat",
       ),
-      home: CitizenRfScreen(),
+      home: AdminPanelScreen(),
     );
   }
 }
