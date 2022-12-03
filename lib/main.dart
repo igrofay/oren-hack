@@ -50,6 +50,12 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
+      path: '/campCardScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return CampCardScreen();
+      },
+    ),
+    GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return WelcomeScreen(coreApp: getIt.get(),);
