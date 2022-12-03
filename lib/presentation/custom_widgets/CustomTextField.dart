@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
       this.hintText,
       this.stroke = true,
       this.bottomMargin = 0.0,
+      this.obscureText = false,
       this.onChanged,
       this.isError = false,
       this.readObly = false,
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
 
   late String? text;
   late bool readObly;
+  late bool obscureText;
   late double height;
   late double? width;
   late String? hintText;
@@ -51,6 +53,7 @@ class CustomTextField extends StatelessWidget {
         child: TextFormField(
           readOnly: readObly,
           initialValue: text,
+          obscureText: obscureText,
           onChanged: onChanged,
           autofocus: true,
           textInputAction: TextInputAction.newline,

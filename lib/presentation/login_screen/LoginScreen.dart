@@ -14,7 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatelessWidget {
   final SignIn signIn;
-  const LoginScreen({super.key, required this.signIn });
+  const LoginScreen({super.key, required this.signIn});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
                               kDefaultVerticalPadding,
-                              Observer(builder: (_){
+                              Observer(builder: (_) {
                                 return CustomTextField(
                                   hintText: "E-mail",
                                   onChanged: signIn.setEmail,
@@ -85,15 +85,14 @@ class LoginScreen extends StatelessWidget {
                                 );
                               }),
                               kDefaultVerticalPadding,
-                              Observer(
-                                builder: (_) {
-                                  return CustomTextField(
-                                    hintText: "Пароль",
-                                    onChanged: signIn.setPassword,
-                                    isError: signIn.isErrorPassword,
-                                  );
-                                }
-                              ),
+                              Observer(builder: (_) {
+                                return CustomTextField(
+                                  hintText: "Пароль",
+                                  obscureText: true,
+                                  onChanged: signIn.setPassword,
+                                  isError: signIn.isErrorPassword,
+                                );
+                              }),
                               kDefaultVerticalPadding,
                               CustomButton(
                                 buttonColor: Colors.white,
@@ -102,24 +101,23 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: signIn.authorization,
                               ),
                               kDefaultVerticalPadding,
-                              Observer(
-                                builder: (context) {
-                                  if(signIn.errorMessage != null){
-                                    return Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          signIn.errorMessage!,
-                                          style: defaultTextStyle(fontWeight: FontWeight.bold, color: Colors.white)
-                                        )
-                                      ],
-                                    );
-                                  }else{
-                                    return const SizedBox();
-                                  }
+                              Observer(builder: (context) {
+                                if (signIn.errorMessage != null) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(signIn.errorMessage!,
+                                          style: defaultTextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white))
+                                    ],
+                                  );
+                                } else {
+                                  return const SizedBox();
                                 }
-                              )
+                              })
                             ],
                           ),
                         ),
