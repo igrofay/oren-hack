@@ -1,3 +1,5 @@
+import 'package:dooking/di/location.dart';
+import 'package:dooking/domain/store/session/sign_in.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
 import 'package:dooking/presentation/utils/Background.dart';
@@ -7,10 +9,12 @@ import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final SignIn signIn;
+  const LoginScreen({super.key, required this.signIn });
 
   @override
   Widget build(BuildContext context) {
@@ -67,37 +71,54 @@ class LoginScreen extends StatelessWidget {
                                 child: Text(
                                   "Или зарегистрируйте аккаунт!",
                                   style: defaultTextStyle(
-                                      size: 18,
+                                      size: 16,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white70),
                                 ),
                               ),
                               kDefaultVerticalPadding,
-                              CustomTextField(hintText: "E-mail"),
+                              Observer(builder: (_){
+                                return CustomTextField(
+                                  hintText: "E-mail",
+                                  onChanged: signIn.setEmail,
+                                  isError: signIn.isErrorEmail,
+                                );
+                              }),
                               kDefaultVerticalPadding,
-                              CustomTextField(hintText: "Пароль"),
+                              Observer(
+                                builder: (_) {
+                                  return CustomTextField(
+                                    hintText: "Пароль",
+                                    onChanged: signIn.setPassword,
+                                    isError: signIn.isErrorPassword,
+                                  );
+                                }
+                              ),
                               kDefaultVerticalPadding,
                               CustomButton(
                                 buttonColor: Colors.white,
                                 textColor: primary,
                                 text: "Зарегистрироваться",
-                                onPressed: () {},
+                                onPressed: signIn.authorization,
                               ),
                               kDefaultVerticalPadding,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "тут ошибка",
-                                    style: defaultTextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.redAccent)
-                                        .copyWith(
-                                            decoration:
-                                                TextDecoration.underline),
-                                  )
-                                ],
+                              Observer(
+                                builder: (context) {
+                                  if(signIn.errorMessage != null){
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          signIn.errorMessage!,
+                                          style: defaultTextStyle(fontWeight: FontWeight.bold, color: Colors.white)
+                                        )
+                                      ],
+                                    );
+                                  }else{
+                                    return const SizedBox();
+                                  }
+                                }
                               )
                             ],
                           ),

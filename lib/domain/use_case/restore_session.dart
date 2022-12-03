@@ -9,7 +9,7 @@ import 'package:mobx/mobx.dart';
 import '../../data/models/token_request.dart';
 import '../model/error.dart';
 import '../repos/auth.dart';
-import '../store/core_app.dart';
+import '../store/app/core_app.dart';
 
 @singleton
 class RestoreSessionUseCase{
