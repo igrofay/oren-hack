@@ -1,4 +1,5 @@
 import 'package:dooking/presentation/admin/AdminPanelScreen.dart';
+import 'package:dooking/presentation/camp_card_screen/CampCardScreen.dart';
 import 'package:dooking/presentation/camps_screen/CampsScreen.dart';
 import 'package:dooking/presentation/camps_screen/DetailedCampScreen.dart';
 import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
@@ -38,7 +39,7 @@ final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
-      path: '/camps',
+      path: '/adminScreen',
       builder: (BuildContext context, GoRouterState state) {
         return AdminPanelScreen();
       },
@@ -50,7 +51,7 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/campCardScreen',
+      path: '/camps',
       builder: (BuildContext context, GoRouterState state) {
         return CampCardScreen();
       },
