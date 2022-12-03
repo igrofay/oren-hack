@@ -1,4 +1,5 @@
 import 'package:dooking/presentation/admin/AdminPanelScreen.dart';
+import 'package:dooking/presentation/camps_screen/CampsScreen.dart';
 import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
 import 'package:dooking/presentation/login_screen/LoginScreen.dart';
 import 'package:dooking/presentation/organization_profile_screen/OrganizationProfileScreen.dart';
@@ -39,14 +40,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return Scaffold(
-          body: Center(
-            child: Text(
-              "Привет)",
-              style: defaultTextStyle(color: Colors.red),
-            ),
-          ),
-        );
+        return CampsScreen();
       },
     ),
     GoRoute(
