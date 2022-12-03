@@ -1,3 +1,4 @@
+import 'package:dooking/presentation/custom_widgets/CustomDropdown.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
 import 'package:dooking/presentation/custom_widgets/Title.dart';
 import 'package:dooking/presentation/utils/Background.dart';
@@ -6,7 +7,9 @@ import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:injectable/injectable.dart';
 
 class CampCardScreen extends StatelessWidget {
   const CampCardScreen({super.key});
@@ -25,6 +28,9 @@ class CampCardScreen extends StatelessWidget {
                 width: con.maxWidth / 1.5,
                 child: Column(
                   children: [
+                    Text("Карточка лагеря",
+                        style: defaultTextStyle(
+                            size: 32, fontWeight: FontWeight.bold)),
                     HeaderTitle("Общее"),
                     CustomTextField(
                       hintText: "Название лагеря",
@@ -35,12 +41,66 @@ class CampCardScreen extends StatelessWidget {
                       height: 150,
                     ),
                     kDefaultVerticalPadding,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        checkBox("Летний сезон", (_) {}, false),
+                        checkBox("Зимний сезон", (_) {}, false),
+                        checkBox("Весений сезон", (_) {}, true),
+                        checkBox("Осений сезон", (_) {}, true),
+                      ],
+                    ),
+                    kDefaultVerticalPadding,
+                    HeaderTitle("Подробная информация"),
+                    kDefaultVerticalPadding,
+                    CustomDropdown(items: [
+                      DropdownMenuItemData(value: "value", name: "value")
+                    ], onChanged: (_) {}, value: "value"),
+                    kDefaultVerticalPadding,
+                    CustomTextField(hintText: "Телефон для справок"),
+                    kDefaultVerticalPadding,
+                    CustomTextField(hintText: "Адрес"),
+                    kDefaultVerticalPadding,
+                    CustomTextField(hintText: "Площадь"),
+                    kDefaultVerticalPadding,
+                    CustomTextField(hintText: "Кол-во корпусов"),
+                    kDefaultVerticalPadding,
+                    kDefaultVerticalPadding,
+                    kDefaultVerticalPadding,
                   ],
                 ));
           }),
         ],
       ),
     ));
+  }
+
+  Widget checkBox(String text, Function(bool?)? onChanged, bool value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 25,
+          width: 25,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.transparent,
+              border: Border.all(color: Colors.white70)),
+          child: Observer(builder: (context) {
+            return Checkbox(
+                fillColor: MaterialStateProperty.all(Colors.transparent),
+                value: value,
+                onChanged: onChanged);
+          }),
+        ),
+        SizedBox(
+          width: kDefaultHorizontalPaddingValue / 2,
+        ),
+        Text(text, style: defaultTextStyle())
+      ],
+    );
   }
 }
 

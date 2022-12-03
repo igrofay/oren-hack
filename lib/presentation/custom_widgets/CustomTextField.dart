@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: isError
-            ? Border.all(color: Colors.redAccent)
+            ? Border.all(color: Colors.red, width: 2)
             : stroke
                 ? Border.all(color: Colors.white24, width: 2)
                 : null,
