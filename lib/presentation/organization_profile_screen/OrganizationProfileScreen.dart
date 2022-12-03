@@ -27,6 +27,9 @@ class OrganizationProfileScreen extends StatelessWidget {
             children: [common(), kDefaultHorizontalPadding, documents()],
           ),
           address(),
+          kDefaultVerticalPadding,
+          kDefaultVerticalPadding,
+          kDefaultVerticalPadding,
         ],
       ),
     ));
@@ -78,13 +81,57 @@ class OrganizationProfileScreen extends StatelessWidget {
             hintText: "Номер паспорта",
           ),
           kDefaultVerticalPadding,
-          CustomTextField(
-            hintText: "Дата выдачи",
+          Stack(
+            children: [
+              CustomTextField(
+                hintText: "Дата выдачи",
+                readObly: true,
+              ),
+              Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 16,
+                  child: AnimatedRotation(
+                    duration: const Duration(milliseconds: 300),
+                    turns: false ? 1 : 0.5,
+                    child: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.white,
+                    ),
+                  )),
+              Positioned.fill(
+                  child: GestureDetector(
+                onTap: () => print("lllla"),
+              )),
+            ],
           ),
+          calendar(true),
           kDefaultVerticalPadding,
-          CustomTextField(
-            hintText: "Срок действия",
+          Stack(
+            children: [
+              CustomTextField(
+                hintText: "Срок действия",
+                readObly: true,
+              ),
+              Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 16,
+                  child: AnimatedRotation(
+                    duration: const Duration(milliseconds: 300),
+                    turns: false ? 1 : 0.5,
+                    child: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.white,
+                    ),
+                  )),
+              Positioned.fill(
+                  child: GestureDetector(
+                onTap: () => print("lllla"),
+              )),
+            ],
           ),
+          calendar(true),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
@@ -121,30 +168,64 @@ class OrganizationProfileScreen extends StatelessWidget {
             hintText: "Гражданство",
           ),
           kDefaultVerticalPadding,
-          CustomTextField(
-            hintText: "Дата рождения",
+          Stack(
+            children: [
+              CustomTextField(
+                hintText: "Дата рождения",
+                readObly: true,
+              ),
+              Positioned(
+                  top: 0,
+                  bottom: 0,
+                  right: 16,
+                  child: AnimatedRotation(
+                    duration: const Duration(milliseconds: 300),
+                    turns: false ? 1 : 0.5,
+                    child: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.white,
+                    ),
+                  )),
+              Positioned.fill(
+                  child: GestureDetector(
+                onTap: () => print("lllla"),
+              )),
+            ],
           ),
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            height: null,
-            child: SfDateRangePicker(
-              rangeTextStyle: TextStyle(color: Colors.white),
-              selectionTextStyle: TextStyle(color: Colors.white),
-              onSelectionChanged: (_) {},
-              selectionMode: DateRangePickerSelectionMode.single,
-              initialDisplayDate: DateTime.now(),
-              // initialSelectedRange: PickerDateRange(
-              //     DateTime.now().subtract(const Duration(days: 4)),
-              //     DateTime.now().add(const Duration(days: 3))),
-            ),
-          ),
+          calendar(true),
           kDefaultVerticalPadding,
-          CustomTextField(
-            hintText: "Номер телефона",
-          )
+          CustomTextField(hintText: "Номер телефона")
         ],
       ),
     ));
+  }
+
+  AnimatedContainer calendar(bool visible) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      height: visible ? null : 0,
+      child: SfDateRangePicker(
+        monthCellStyle: const DateRangePickerMonthCellStyle(
+            textStyle: TextStyle(color: Colors.white70)),
+        yearCellStyle: const DateRangePickerYearCellStyle(
+            textStyle: TextStyle(color: Colors.white)),
+        headerStyle: const DateRangePickerHeaderStyle(
+            textStyle: TextStyle(color: Colors.white)),
+        monthViewSettings: const DateRangePickerMonthViewSettings(
+            viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                textStyle: TextStyle(color: Colors.white)),
+            weekNumberStyle: DateRangePickerWeekNumberStyle(
+                textStyle: TextStyle(color: Colors.white))),
+        rangeTextStyle: const TextStyle(color: Colors.white),
+        selectionTextStyle: const TextStyle(color: Colors.white),
+        onSelectionChanged: (_) {},
+        selectionMode: DateRangePickerSelectionMode.single,
+        initialSelectedDate: DateTime.now(),
+        // initialSelectedRange: PickerDateRange(
+        //     DateTime.now().subtract(const Duration(days: 4)),
+        //     DateTime.now().add(const Duration(days: 3))),
+      ),
+    );
   }
 }
 

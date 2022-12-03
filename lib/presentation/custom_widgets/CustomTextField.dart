@@ -13,12 +13,14 @@ class CustomTextField extends StatelessWidget {
       this.bottomMargin = 0.0,
       this.onChanged,
       this.isError = false,
+      this.readObly = false,
       this.onFieldSubmitted,
       this.inputFormatters,
       this.onEditingComplete})
       : super(key: key);
 
   late String? text;
+  late bool readObly;
   late double height;
   late double? width;
   late String? hintText;
@@ -47,6 +49,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
+          readOnly: readObly,
           initialValue: text,
           onChanged: onChanged,
           autofocus: true,
