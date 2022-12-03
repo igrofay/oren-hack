@@ -10,11 +10,12 @@ import 'package:dooking/data/data_source/data_source.dart' as _i4;
 import 'package:dooking/data/data_source/rest_client.dart' as _i9;
 import 'package:dooking/data/repos/auth_impl.dart' as _i11;
 import 'package:dooking/data/repos/token_impl.dart' as _i7;
-import 'package:dooking/di/register_module_data_source.dart' as _i14;
+import 'package:dooking/di/register_module_data_source.dart' as _i15;
 import 'package:dooking/domain/repos/auth.dart' as _i10;
 import 'package:dooking/domain/repos/token.dart' as _i6;
 import 'package:dooking/domain/store/app/core_app.dart' as _i3;
 import 'package:dooking/domain/store/session/sign_in.dart' as _i13;
+import 'package:dooking/domain/store/session/sign_up.dart' as _i14;
 import 'package:dooking/domain/use_case/restore_session.dart' as _i12;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -62,8 +63,13 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i6.TokenRepos>(),
           gh<_i3.CoreApp>(),
         ));
+    gh.factory<_i14.SignUp>(() => _i14.SignUp(
+          gh<_i10.AuthRepos>(),
+          gh<_i6.TokenRepos>(),
+          gh<_i3.CoreApp>(),
+        ));
     return this;
   }
 }
 
-class _$RegModuleDataSource extends _i14.RegModuleDataSource {}
+class _$RegModuleDataSource extends _i15.RegModuleDataSource {}

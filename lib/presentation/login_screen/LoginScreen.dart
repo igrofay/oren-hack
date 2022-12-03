@@ -1,8 +1,6 @@
-import 'package:dooking/di/location.dart';
 import 'package:dooking/domain/store/session/sign_in.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
-import 'package:dooking/presentation/utils/Background.dart';
 import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
@@ -20,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(NeMainBackgroundImage),
             fit: BoxFit.cover,
@@ -88,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                               Observer(builder: (_) {
                                 return CustomTextField(
                                   hintText: "Пароль",
-                                  obscureText: true,
+                                  isPassword: true,
                                   onChanged: signIn.setPassword,
                                   isError: signIn.isErrorPassword,
                                 );

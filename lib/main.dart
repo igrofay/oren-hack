@@ -64,7 +64,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/registrationScreen',
       builder: (BuildContext context, GoRouterState state) {
-        return RegistrationScreen();
+        return RegistrationScreen(signUp: getIt.get());
       },
     ),
     GoRoute(
