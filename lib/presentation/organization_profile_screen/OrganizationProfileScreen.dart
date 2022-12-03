@@ -26,7 +26,7 @@ class OrganizationProfileScreen extends StatelessWidget {
             direction: Axis.horizontal,
             children: [common(), kDefaultHorizontalPadding, documents()],
           ),
-          address(),
+          addressAndNextButton(),
           kDefaultVerticalPadding,
           kDefaultVerticalPadding,
           kDefaultVerticalPadding,
@@ -35,7 +35,7 @@ class OrganizationProfileScreen extends StatelessWidget {
     ));
   }
 
-  LayoutBuilder address() {
+  LayoutBuilder addressAndNextButton() {
     return LayoutBuilder(builder: (_, con) {
       return SizedBox(
           width: con.maxWidth / 2,

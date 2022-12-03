@@ -2,9 +2,12 @@ import 'package:dooking/presentation/admin/AdminPanelScreen.dart';
 import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
 import 'package:dooking/presentation/login_screen/LoginScreen.dart';
 import 'package:dooking/presentation/organization_profile_screen/OrganizationProfileScreen.dart';
+import 'package:dooking/presentation/parent_profile_screen/ParentProfileScreen.dart';
 import 'package:dooking/presentation/registration_screen/RegistrationScreen.dart';
 import 'package:dooking/presentation/welcome_screen/WelcomeScreen.dart';
+import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'di/location.dart';
 
@@ -19,13 +22,74 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       debugShowCheckedModeBanner: false,
       title: 'Счастливый Билет',
       theme: ThemeData(
         fontFamily: "Montserrat",
       ),
-      home: LoginScreen(signIn: getIt.get(),),
     );
   }
 }
+
+final GoRouter _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return Scaffold(
+          body: Center(
+            child: Text(
+              "Привет)",
+              style: defaultTextStyle(color: Colors.red),
+            ),
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/welcomeScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return WelcomeScreen();
+      },
+    ),
+    GoRoute(
+      path: '/loginScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return LoginScreen(signIn: getIt.get());
+      },
+    ),
+    GoRoute(
+      path: '/registrationScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return RegistrationScreen();
+      },
+    ),
+    GoRoute(
+      path: '/adminScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return AdminPanelScreen();
+      },
+    ),
+    GoRoute(
+      path: '/sitizen_RF',
+      builder: (BuildContext context, GoRouterState state) {
+        return CitizenRfScreen();
+      },
+    ),
+    GoRoute(
+      path: '/organizationProfileScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return OrganizationProfileScreen();
+      },
+    ),
+    GoRoute(
+      path: '/parentProfileScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return ParentProfileScreen();
+      },
+    ),
+  ],
+);
