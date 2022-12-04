@@ -77,7 +77,7 @@ class ChildListScreen extends StatelessWidget {
               }),
             )),
             if(childrenParent.stateChildrenParent == StateChildrenParent.inputForm)
-              ChildProfileScreen()
+              ChildProfileScreen(childForm: childrenParent.childForm!,)
       ],
     );
           }
@@ -135,7 +135,7 @@ class Header extends StatelessWidget {
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: ()=> context.go('/childListScreen'),
+              onPressed: ()=> context.push('/childListScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Дети", style: defaultTextStyle())),

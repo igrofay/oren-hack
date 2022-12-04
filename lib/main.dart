@@ -88,12 +88,12 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
-      GoRoute(
-        path: '/childProfileScreen',
-        builder: (BuildContext context, GoRouterState state) {
-          return ChildProfileScreen();
-        },
-      ),
+      // GoRoute(
+      //   path: '/childProfileScreen',
+      //   builder: (BuildContext context, GoRouterState state) {
+      //     return ChildProfileScreen(childForm: getIt,);
+      //   },
+      // ),
       GoRoute(
         path: '/camps',
         builder: (BuildContext context, GoRouterState state) {

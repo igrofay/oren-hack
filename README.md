@@ -4,17 +4,20 @@
 
 ## Проблема работы Dio 
 
-Dio не может работать 
+Dio не может работать в дебаге под Web
 
 ![](images/solution.jpg)
 
-This project is a starting point for a Flutter application.
+## Установка URL для работы с сервером 
 
-A few resources to get you started if this is your first Flutter project:
+Находим источник данных 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![](images/path_file.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Меняем URL 
+
+![](images/change_url.png)
+
+## Запуск программы 
+
+![](images/run_proj.png)
