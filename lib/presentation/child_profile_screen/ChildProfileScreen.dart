@@ -56,7 +56,11 @@ class ChildProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               HeaderTitle("Адрес"),
-              CustomTextField(hintText: "Место жительства"),
+              CustomTextField(
+                  hintText: "Место жительства",
+                onChanged: (v)=>childForm.address= v,
+                text: childForm.address,
+              ),
               kDefaultVerticalPadding,
               LayoutBuilder(builder: (_, con) {
                 return SizedBox(
