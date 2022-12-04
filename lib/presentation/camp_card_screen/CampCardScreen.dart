@@ -1,15 +1,18 @@
+import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomDropdown.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
 import 'package:dooking/presentation/custom_widgets/Title.dart';
 import 'package:dooking/presentation/utils/Background.dart';
 import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
+import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:injectable/injectable.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CampCardScreen extends StatelessWidget {
   const CampCardScreen({super.key});
@@ -67,6 +70,50 @@ class CampCardScreen extends StatelessWidget {
                     CustomTextField(hintText: "Кол-во корпусов"),
                     kDefaultVerticalPadding,
                     kDefaultVerticalPadding,
+                    HeaderTitle("Сроки посещения"),
+                    LayoutBuilder(
+                        builder: (_, con) => SizedBox(
+                              width: con.maxWidth / 2,
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      CustomTextField(
+                                        hintText: "Дата рождения",
+                                        readObly: true,
+                                      ),
+                                      Positioned(
+                                          top: 0,
+                                          bottom: 0,
+                                          right: 16,
+                                          child: AnimatedRotation(
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            turns: false ? 1 : 0.5,
+                                            child: const Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: Colors.white,
+                                            ),
+                                          )),
+                                      Positioned.fill(
+                                          child: GestureDetector(
+                                        onTap: () => print("lllla"),
+                                      )),
+                                    ],
+                                  ),
+                                  calendar(true, (_) {}),
+                                  kDefaultVerticalPadding,
+                                  CustomButton(
+                                    text: "Отправить",
+                                    onPressed: () {},
+                                    buttonColor: Colors.white,
+                                    textColor: primary,
+                                  ),
+                                ],
+                              ),
+                            )),
+                    kDefaultVerticalPadding,
+                    kDefaultVerticalPadding,
                     kDefaultVerticalPadding,
                   ],
                 ));
@@ -74,6 +121,39 @@ class CampCardScreen extends StatelessWidget {
         ],
       ),
     ));
+  }
+
+  AnimatedContainer calendar(bool visible,
+      Function(DateRangePickerSelectionChangedArgs)? onSelectionChanged) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      height: visible ? null : 0,
+      child: SfDateRangePicker(
+        selectionColor: Colors.amber,
+        todayHighlightColor: Colors.transparent,
+        monthCellStyle: const DateRangePickerMonthCellStyle(
+            todayTextStyle: TextStyle(color: Colors.white70),
+            textStyle: TextStyle(color: Colors.white70)),
+        yearCellStyle: const DateRangePickerYearCellStyle(
+            textStyle: TextStyle(color: Colors.white)),
+        headerStyle: const DateRangePickerHeaderStyle(
+            textStyle:
+                TextStyle(color: Colors.white, decorationColor: Colors.white)),
+        monthViewSettings: const DateRangePickerMonthViewSettings(
+            viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                textStyle: TextStyle(color: Colors.white)),
+            weekNumberStyle: DateRangePickerWeekNumberStyle(
+                textStyle: TextStyle(color: Colors.white))),
+        rangeTextStyle: const TextStyle(color: Colors.white),
+        selectionTextStyle: const TextStyle(color: Colors.white),
+        onSelectionChanged: onSelectionChanged,
+        selectionMode: DateRangePickerSelectionMode.range,
+        initialSelectedDate: DateTime.now(),
+        // initialSelectedRange: PickerDateRange(
+        //     DateTime.now().subtract(const Duration(days: 4)),
+        //     DateTime.now().add(const Duration(days: 3))),
+      ),
+    );
   }
 
   Widget checkBox(String text, Function(bool?)? onChanged, bool value) {
