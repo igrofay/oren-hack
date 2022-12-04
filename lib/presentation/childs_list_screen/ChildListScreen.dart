@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../di/location.dart';
 import '../../domain/store/app/core_app.dart';
 import '../../domain/store/parent/children_parent.dart';
+import '../child_profile_screen/ParentProfileScreen.dart';
 
 class ChildListScreen extends StatelessWidget {
   final ChildrenParent childrenParent;
@@ -21,59 +22,66 @@ class ChildListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundScaffold(
-        child: Column(
+        child: Observer(
+          builder: (context) {
+            return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Header(),
-        Expanded(child: SingleChildScrollView(
-          child: LayoutBuilder(builder: (_, con) {
-            return SizedBox(
-              width: con.maxWidth / 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Профиль ребенка",
-                    style:
-                        defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
-                  ),
-                  kDefaultVerticalPadding,
-                  kDefaultVerticalPadding,
-                  //через 3 точки сюда просо генерь список и все
-                  Observer(builder: (_){
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: List.generate(
-                          childrenParent.childList.length,
-                              (index) =>  Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                child: CustomButton(
-                                    text: childrenParent.childList[index].fio,
-                                    textColor: Colors.white,
-                                    buttonColor: Colors.transparent,
-                                    onPressed: () {}
-                                ),
-                              )
+            Header(),
+            if(childrenParent.stateChildrenParent == StateChildrenParent.list)
+              Expanded(child: SingleChildScrollView(
+              child: LayoutBuilder(builder: (_, con) {
+                return SizedBox(
+                  width: con.maxWidth / 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Профиль ребенка",
+                        style:
+                            defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
                       ),
-                    );
-                  }),
-                  CustomButton(
-                      text: "+ Добавить",
-                      textColor: primary,
-                      buttonColor: Colors.white,
-                      onPressed: () {}),
-                  kDefaultVerticalPadding,
-                  kDefaultVerticalPadding,
-                  kDefaultVerticalPadding,
-                ],
-              ),
-            );
-          }),
-        ))
+                      kDefaultVerticalPadding,
+                      kDefaultVerticalPadding,
+                      //через 3 точки сюда просо генерь список и все
+                      Observer(builder: (_){
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: List.generate(
+                              childrenParent.childList.length,
+                                  (index) =>  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: CustomButton(
+                                        text: childrenParent.childList[index].fio,
+                                        textColor: Colors.white,
+                                        buttonColor: Colors.transparent,
+                                        onPressed: () {}
+                                    ),
+                                  )
+                          ),
+                        );
+                      }),
+                      CustomButton(
+                          text: "+ Добавить",
+                          textColor: primary,
+                          buttonColor: Colors.white,
+                          onPressed: childrenParent.addChild),
+                      kDefaultVerticalPadding,
+                      kDefaultVerticalPadding,
+                      kDefaultVerticalPadding,
+                    ],
+                  ),
+                );
+              }),
+            )),
+            if(childrenParent.stateChildrenParent == StateChildrenParent.inputForm)
+              ChildProfileScreen()
       ],
-    ));
+    );
+          }
+        ));
   }
 }
 

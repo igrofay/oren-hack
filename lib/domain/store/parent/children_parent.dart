@@ -1,6 +1,7 @@
 
 
 import 'package:dooking/data/models/child.dart';
+import 'package:dooking/domain/store/parent/child_form.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -21,6 +22,9 @@ abstract class _ChildrenParent with Store{
   }
 
   @observable
+  StateChildrenParent stateChildrenParent = StateChildrenParent.list;
+
+  @observable
   ObservableList<Child> childList = ObservableList();
 
   @action
@@ -29,6 +33,17 @@ abstract class _ChildrenParent with Store{
     childList.addAll(answer);
   }
 
+  @action
+  void addChild(){
+    stateChildrenParent = StateChildrenParent.inputForm;
+  }
+
+  @action
+  void editChild(){
+    stateChildrenParent = StateChildrenParent.inputForm;
+  }
+
+  ChildForm? childForm;
 
 
 }

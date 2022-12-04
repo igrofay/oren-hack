@@ -23,7 +23,6 @@ class ChildProfileScreen extends StatelessWidget {
         child: SingleChildScrollView(
       child: Column(
         children: [
-          Header(),
           Text(
             "Профиль ребенка",
             style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
@@ -224,120 +223,6 @@ class ChildProfileScreen extends StatelessWidget {
         // initialSelectedRange: PickerDateRange(
         //     DateTime.now().subtract(const Duration(days: 4)),
         //     DateTime.now().add(const Duration(days: 3))),
-      ),
-    );
-  }
-}
-
-class Header extends StatelessWidget {
-  const Header({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin:
-          const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue),
-      height: HEIGHT,
-      child: Stack(
-        children: [sun(), nav(), reg()],
-      ),
-    );
-  }
-
-  Widget reg() {
-    return Positioned(
-      top: 0,
-      bottom: 0,
-      right: 0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CupertinoButton(
-            onPressed: () {},
-            padding: EdgeInsets.zero,
-            minSize: 0,
-            child: Text(
-              "Зарегистрироваться",
-              style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {},
-            minSize: 0,
-            child: Text(
-              "Или войдите в аккаунт",
-              style: defaultTextStyle(size: 13, fontWeight: FontWeight.bold)
-                  .copyWith(decoration: TextDecoration.underline),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget nav() {
-    return Positioned(
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CupertinoButton(
-              onPressed: () {},
-              minSize: 0,
-              padding: EdgeInsets.zero,
-              child: Text("Лагеря", style: defaultTextStyle())),
-          kDefaultHorizontalPadding,
-          CupertinoButton(
-              onPressed: () {},
-              minSize: 0,
-              padding: EdgeInsets.zero,
-              child: Text("Дети", style: defaultTextStyle())),
-          kDefaultHorizontalPadding,
-          CupertinoButton(
-              onPressed: () {},
-              minSize: 0,
-              padding: EdgeInsets.zero,
-              child: Text("Профиль", style: defaultTextStyle())),
-        ],
-      ),
-    );
-  }
-
-  Widget sun() {
-    return Positioned(
-      top: 0,
-      bottom: 0,
-      left: 0,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SvgPicture.asset(
-            SunSvg,
-            height: HEIGHT / 1.5,
-          ),
-          const SizedBox(
-            width: kDefaultHorizontalPaddingValue,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Счастливый билет",
-                  style:
-                      defaultTextStyle(size: 16, fontWeight: FontWeight.bold)),
-              Text("Бронирование Лагеря для детей", style: defaultTextStyle()),
-            ],
-          )
-        ],
       ),
     );
   }
