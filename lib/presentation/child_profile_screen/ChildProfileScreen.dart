@@ -87,19 +87,32 @@ class ChildProfileScreen extends StatelessWidget {
             return SizedBox(
                 width: con.maxWidth / 1.5, child: HeaderTitle("Документы"));
           }),
-          CustomDropdown(items: [
-            DropdownMenuItemData(name: "Паспорт", value: "Паспорт"),
-            DropdownMenuItemData(
-                name: "Свидетельсво о рождении",
-                value: "Свидетельсво о рождении")
-          ],
-              onChanged: (_) { }, value: "Паспорт"),
+          Observer(
+            builder: (context) {
+              return CustomDropdown(items: [
+                DropdownMenuItemData(name: "Паспорт", value: "Паспорт"),
+                DropdownMenuItemData(
+                    name: "Свидетельсво о рождении",
+                    value: "Свидетельсво о рождении")
+              ],
+                  onChanged: (v) {
+                if(v == "Паспорт") {
+                  runInAction(() => childForm.isPassport = true);
+
+                } else {
+                  runInAction(() => childForm.isPassport = false);
+                }},
+                value: childForm.isPassport ? "Паспорт" : "Свидетельсво о рождении", );
+            }
+          ),
           if (true) kDefaultVerticalPadding,
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             height: true ? null : 0,
             child: CustomTextField(
               hintText: "Серия паспорта",
+              text: childForm.series,
+              onChanged: (v)=> childForm.series = v,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
               ],
