@@ -2,6 +2,8 @@ import 'package:dooking/presentation/admin/AdminPanelScreen.dart';
 import 'package:dooking/presentation/camp_card_screen/CampCardScreen.dart';
 import 'package:dooking/presentation/camps_screen/CampsScreen.dart';
 import 'package:dooking/presentation/camps_screen/DetailedCampScreen.dart';
+import 'package:dooking/presentation/child_profile_screen/ParentProfileScreen.dart';
+import 'package:dooking/presentation/chils_list_screen/ChildListScreen.dart';
 import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
 import 'package:dooking/presentation/login_screen/LoginScreen.dart';
 import 'package:dooking/presentation/organization_profile_screen/OrganizationProfileScreen.dart';
@@ -45,7 +47,25 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
+      path: '/childListScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return ChildListScreen();
+      },
+    ),
+    GoRoute(
+      path: '/childProfileScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return ChildProfileScreen();
+      },
+    ),
+    GoRoute(
       path: '/camps',
+      builder: (BuildContext context, GoRouterState state) {
+        return CampsScreen();
+      },
+    ),
+    GoRoute(
+      path: '/campCardScreen',
       builder: (BuildContext context, GoRouterState state) {
         return CampCardScreen();
       },
