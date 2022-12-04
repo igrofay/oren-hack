@@ -1,70 +1,61 @@
-import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
+import 'package:dooking/res/constants.dart';
+import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/models/camp.dart';
-import '../../res/images.dart';
-
 class CampItem extends StatelessWidget {
-  Camp camp;
-
   CampItem({
     Key? key,
-    required this.camp,
-});
+  });
 
   @override
   Widget build(BuildContext context) {
-    return
-      Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4)
-        ),
-        height: 320,
-        margin: EdgeInsets.only(bottom: 16),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Column(
+    return LayoutBuilder(builder: (_, con) {
+      return SizedBox(
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.only(bottom: kDefaultVerticalPaddingValue),
+            height: HEIGHT,
+            width: con.maxWidth / 2,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: Colors.white))),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flex(
-                  direction: Axis.horizontal,
-                  children: [
-                    Flexible(
-                        child: getImageWidget()),
-                    Flexible(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-
-                        children: [
-                          Text(camp.name),
-                          Text(camp.campType),
-                          Text(camp.description,)
-                        ],
-                      ),
-                    )
-                  ]
+                  SizedBox(),
+                  Text(
+                    "Лагерь №1",
+                    style: defaultTextStyle(),
                   ),
+                  // тут без row. просто чтобы знал какие есть
                   Row(
                     children: [
-                      TextButton(onPressed: () {}, child: Text("Принять")),
-                      TextButton(onPressed: () {}, child: Text("Отклонить")),
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.white,
+                      ),
+                      Icon(
+                        Icons.error_outline,
+                        color: Colors.white,
+                      ),
+                      Icon(
+                        Icons.cancel_outlined,
+                        color: Colors.white,
+                      )
                     ],
                   )
-                ]
+                ],
               ),
             ),
-          ],
-        )
-    );
-  }
-
-  Widget getImageWidget(){
-    return SizedBox(
-      width: 320,
-      height: 320,
-      child: Image(image: AssetImage("assets/asset.png"))
-    );
+          ),
+        ),
+      );
+    });
   }
 }
