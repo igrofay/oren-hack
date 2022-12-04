@@ -294,7 +294,7 @@ class Header extends StatelessWidget {
       top: 0,
       bottom: 0,
       right: 0,
-      child: Text(getIt.get<CoreApp>().emailUser, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),)
+      child: Center(child: Text(getIt.get<CoreApp>().emailUser, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),))
     );
   }
 

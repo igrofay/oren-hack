@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
-          controller: TextEditingController(text: text),
+          // controller: TextEditingController(text: text),
           readOnly: readObly,
           obscureText: isPassword,
           onChanged: onChanged,

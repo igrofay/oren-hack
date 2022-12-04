@@ -162,7 +162,7 @@ class Header extends StatelessWidget {
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed:  ()=>context.go('/loginScreen'),
+              onPressed:  ()=> context.go('/loginScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Профиль", style: defaultTextStyle())),

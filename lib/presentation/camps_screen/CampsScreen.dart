@@ -1,3 +1,5 @@
+import 'package:dooking/di/location.dart';
+import 'package:dooking/domain/store/app/core_app.dart';
 import 'package:dooking/presentation/utils/Background.dart';
 import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
@@ -5,6 +7,9 @@ import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../domain/model/user_state_app.dart';
 
 class CampsScreen extends StatelessWidget {
   const CampsScreen({super.key});
@@ -120,22 +125,24 @@ class Header extends StatelessWidget {
           const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue),
       height: HEIGHT,
       child: Stack(
-        children: [sun(), nav(), reg()],
+        children: [sun(), nav(context), reg(context)],
       ),
     );
   }
 
-  Widget reg() {
+  Widget reg(BuildContext context) {
+    final email = getIt.get<CoreApp>().emailUser;
     return Positioned(
       top: 0,
       bottom: 0,
       right: 0,
-      child: Column(
+      child: email.isEmpty
+          ? Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CupertinoButton(
-            onPressed: () {},
+            onPressed: () => context.go("/registrationScreen"),
             padding: EdgeInsets.zero,
             minSize: 0,
             child: Text(
@@ -144,7 +151,7 @@ class Header extends StatelessWidget {
             ),
           ),
           CupertinoButton(
-            onPressed: () {},
+            onPressed: () => context.go("/registrationScreen"),
             padding: EdgeInsets.zero,
             minSize: 0,
             child: Text(
@@ -154,11 +161,12 @@ class Header extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      )
+          : Text(email, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),),
     );
   }
 
-  Widget nav() {
+  Widget nav(BuildContext context) {
     return Positioned(
       top: 0,
       bottom: 0,
@@ -169,13 +177,24 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CupertinoButton(
-              onPressed: () {},
+              onPressed: null,
               padding: EdgeInsets.zero,
               minSize: 0,
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: () {},
+              onPressed: () {
+                switch(getIt.get<CoreApp>().userStateApp){
+                  case UserStateApp.noAuthorized:
+                    context.go('/loginScreen');
+                    break;
+                  case UserStateApp.parent:
+                    context.go('/parentProfileScreen');
+                    break;
+                  default:
+                    break;
+                }
+              },
               padding: EdgeInsets.zero,
               minSize: 0,
               child: Text("Профиль", style: defaultTextStyle())),
