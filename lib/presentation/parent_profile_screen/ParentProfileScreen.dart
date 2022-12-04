@@ -26,30 +26,31 @@ class ParentProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundScaffold(
-        child: SingleChildScrollView(
-      child: Observer(builder: (_){
-        return parentForm.state == StateParentForm.load
-            ? const SizedBox()
-            : Column(
-          children: [
-            Header(parentForm: parentForm,),
-            Text(
-              "Профиль родителя",
-              style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
-            ),
-            Flex(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              direction: Axis.horizontal,
-              children: [common(), kDefaultHorizontalPadding, documents()],
-            ),
-            addressAndNexButton(),
-            kDefaultVerticalPadding,
-            kDefaultVerticalPadding,
-            kDefaultVerticalPadding,
-          ],
-        );
-      })
-    ));
+        child: SingleChildScrollView(child: Observer(builder: (_) {
+      return parentForm.state == StateParentForm.load
+          ? const SizedBox()
+          : Column(
+              children: [
+                Header(
+                  parentForm: parentForm,
+                ),
+                Text(
+                  "Профиль родителя",
+                  style:
+                      defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
+                ),
+                Flex(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  direction: Axis.horizontal,
+                  children: [common(), kDefaultHorizontalPadding, documents()],
+                ),
+                addressAndNexButton(),
+                kDefaultVerticalPadding,
+                kDefaultVerticalPadding,
+                kDefaultVerticalPadding,
+              ],
+            );
+    })));
   }
 
   LayoutBuilder addressAndNexButton() {
@@ -60,8 +61,8 @@ class ParentProfileScreen extends StatelessWidget {
             children: [
               HeaderTitle("Адрес"),
               CustomTextField(
-                  hintText: "Место жительства",
-                onChanged: (value)=> parentForm.address = value,
+                hintText: "Место жительства",
+                onChanged: (value) => parentForm.address = value,
               ),
               kDefaultVerticalPadding,
               LayoutBuilder(builder: (_, con) {
@@ -71,7 +72,7 @@ class ParentProfileScreen extends StatelessWidget {
                     text: "Сохранить",
                     textColor: primary,
                     buttonColor: Colors.white,
-                    onPressed: ()=> parentForm.save(),
+                    onPressed: () => parentForm.save(),
                   ),
                 );
               })
@@ -95,24 +96,20 @@ class ParentProfileScreen extends StatelessWidget {
           }),
           CustomTextField(
             hintText: "Серия паспорта",
-            onChanged: (value)=> parentForm.seriesPassport = value,
+            onChanged: (value) => parentForm.seriesPassport = value,
             isError: parentForm.isErrorSeriesPassport,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
-            hintText: "Номер паспорта",
-            onChanged: (value)=> parentForm.numberPassport = value,
-              isError: parentForm.isErrorNumberPassport
-          ),
+              hintText: "Номер паспорта",
+              onChanged: (value) => parentForm.numberPassport = value,
+              isError: parentForm.isErrorNumberPassport),
           kDefaultVerticalPadding,
           Stack(
             children: [
-              Observer(builder: (_){
-                return CustomTextField(
-                  hintText: "Дата выдачи",
-                  readObly: true,
-                  text: parentForm.dateOfGettingPassport,
-                );
+              Observer(builder: (_) {
+                return dateField(
+                    "Дата выдачи", parentForm.dateOfGettingPassport);
               }),
               Positioned(
                   top: 0,
@@ -120,7 +117,8 @@ class ParentProfileScreen extends StatelessWidget {
                   right: 16,
                   child: AnimatedRotation(
                     duration: const Duration(milliseconds: 300),
-                    turns: false ? 1 : 0.5,
+                    turns:
+                        parentForm.showCalendarDateOfGettingPassport ? 0.5 : 1,
                     child: const Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.white,
@@ -128,28 +126,29 @@ class ParentProfileScreen extends StatelessWidget {
                   )),
               Positioned.fill(
                   child: GestureDetector(
-                onTap: () => runInAction((){
-                  parentForm.showCalendarDateOfGettingPassport = ! parentForm.showCalendarDateOfGettingPassport;
+                onTap: () => runInAction(() {
+                  parentForm.showCalendarDateOfGettingPassport =
+                      !parentForm.showCalendarDateOfGettingPassport;
                 }),
               )),
             ],
           ),
-          Observer(
-            builder: (context) {
-              return calendar(parentForm.showCalendarDateOfGettingPassport, (value) {
-                runInAction(() => parentForm.dateOfGettingPassport = value.value.toString().substring(0,10));
-              });
-            }
-          ),
+          Observer(builder: (context) {
+            return calendar(parentForm.showCalendarDateOfGettingPassport,
+                (value) {
+              runInAction(() => parentForm.dateOfGettingPassport =
+                  value.value.toString().substring(0, 10));
+            });
+          }),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Кем выдан",
-            onChanged: (value)=> parentForm.issueName,
+            onChanged: (value) => parentForm.issueName,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
-            onChanged: (value)=> parentForm.snils,
+            onChanged: (value) => parentForm.snils,
           ),
         ],
       ),
@@ -175,16 +174,18 @@ class ParentProfileScreen extends StatelessWidget {
             isError: parentForm.isErrorAddress,
           ),
           kDefaultVerticalPadding,
-          CustomDropdown(items: [
-            DropdownMenuItemData(name: "Родитель", value: "Родитель"),
-            DropdownMenuItemData(
-                name: "Законный представитель ребенка",
-                value: "Законный представитель ребенка"
-            )
-          ], onChanged: (value) {
-            if(value== null) return;
-            runInAction(()=> parentForm.parentStatus = value);
-          }, value: parentForm.parentStatus),
+          CustomDropdown(
+              items: [
+                DropdownMenuItemData(name: "Родитель", value: "Родитель"),
+                DropdownMenuItemData(
+                    name: "Законный представитель ребенка",
+                    value: "Законный представитель ребенка")
+              ],
+              onChanged: (value) {
+                if (value == null) return;
+                runInAction(() => parentForm.parentStatus = value);
+              },
+              value: parentForm.parentStatus),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Гражданство",
@@ -193,22 +194,16 @@ class ParentProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           Stack(
             children: [
-              Observer(
-                builder: (context) {
-                  return CustomTextField(
-                    hintText: "Дата рождения",
-                    readObly: true,
-                    text: parentForm.birthday,
-                  );
-                }
-              ),
+              Observer(builder: (context) {
+                return dateField("Дата рождения", parentForm.birthday);
+              }),
               Positioned(
                   top: 0,
                   bottom: 0,
                   right: 16,
                   child: AnimatedRotation(
                     duration: const Duration(milliseconds: 300),
-                    turns: false ? 1 : 0.5,
+                    turns: parentForm.showCalendarBirthday ? 0.5 : 1,
                     child: const Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.white,
@@ -216,19 +211,21 @@ class ParentProfileScreen extends StatelessWidget {
                   )),
               Positioned.fill(
                   child: GestureDetector(
-                onTap: () => runInAction(() => parentForm.showCalendarBirthday = !parentForm.showCalendarBirthday),
+                onTap: () => runInAction(() => parentForm.showCalendarBirthday =
+                    !parentForm.showCalendarBirthday),
               )),
             ],
           ),
-          Observer(builder: (_){
+          Observer(builder: (_) {
             return calendar(parentForm.showCalendarBirthday, (value) {
-              runInAction(() => parentForm.birthday = value.value.toString().substring(0,10));
+              runInAction(() => parentForm.birthday =
+                  value.value.toString().substring(0, 10));
             });
           }),
           kDefaultVerticalPadding,
           CustomTextField(
-              hintText: "Номер телефона",
-            onChanged: (value)=>parentForm.phoneNumber = value,
+            hintText: "Номер телефона",
+            onChanged: (value) => parentForm.phoneNumber = value,
             isError: parentForm.isErrorPhoneNumber,
           )
         ],
@@ -236,6 +233,21 @@ class ParentProfileScreen extends StatelessWidget {
     ));
   }
 
+  Container dateField(String hint, String text) {
+    return Container(
+      height: HEIGHT,
+      decoration: BoxDecoration(
+          color: Colors.white24,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white24, width: 2)),
+      child: Center(
+        child: Text(
+          text == "" ? hint : text,
+          style: defaultTextStyle(color: text == "" ? Colors.white30 : null),
+        ),
+      ),
+    );
+  }
 
   AnimatedContainer calendar(bool visible,
       DateRangePickerSelectionChangedCallback onSelectionChanged) {
@@ -274,7 +286,8 @@ class ParentProfileScreen extends StatelessWidget {
 class Header extends StatelessWidget {
   final ParentForm parentForm;
   const Header({
-    Key? key, required this.parentForm,
+    Key? key,
+    required this.parentForm,
   }) : super(key: key);
 
   @override
@@ -291,11 +304,13 @@ class Header extends StatelessWidget {
 
   Widget reg() {
     return Positioned(
-      top: 0,
-      bottom: 0,
-      right: 0,
-      child: Text(getIt.get<CoreApp>().emailUser, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),)
-    );
+        top: 0,
+        bottom: 0,
+        right: 0,
+        child: Text(
+          getIt.get<CoreApp>().emailUser,
+          style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
+        ));
   }
 
   Widget nav(BuildContext context) {
@@ -309,13 +324,13 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CupertinoButton(
-              onPressed: ()=> context.go('/camps'),
+              onPressed: () => context.go('/camps'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: ()=> context.go('/childListScreen'),
+              onPressed: () => context.go('/childListScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Дети", style: defaultTextStyle())),
