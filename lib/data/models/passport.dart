@@ -4,16 +4,13 @@ part 'passport.g.dart';
 
 @JsonSerializable()
 class Passport {
-
   int series;
   int number;
   String dateOfGetting;
   String issueName;
-  String dateOfEnding;
-  String isRussianPassport;
+  bool isRussianPassport;
 
-  Passport(this.series, this.number, this.dateOfGetting, this.issueName,
-      this.dateOfEnding, this.isRussianPassport);
+  Passport(this.series, this.number, this.dateOfGetting, this.issueName, this.isRussianPassport);
 
   factory Passport.fromJson(Map<String, dynamic> json) =>
       _$PassportFromJson(json);

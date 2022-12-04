@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dio/dio.dart';
 import 'package:dooking/domain/store/session/sign_in.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
@@ -76,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                     size: 32, fontWeight: FontWeight.bold),
                               ),
                               CupertinoButton(
-                                onPressed: () {},
+                                onPressed: ()=> context.push('/registrationScreen'),
                                 padding: EdgeInsets.zero,
                                 minSize: 0,
                                 child: Text(
@@ -108,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                               CustomButton(
                                 buttonColor: Colors.white,
                                 textColor: primary,
-                                text: "Зарегистрироваться",
+                                text: "Войти",
                                 onPressed: signIn.authorization,
                               ),
                               kDefaultVerticalPadding,

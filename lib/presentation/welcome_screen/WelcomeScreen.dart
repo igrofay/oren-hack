@@ -19,96 +19,74 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ReactionBuilder(
-        builder: (_)=> autorun((_) {
-          Future.delayed(const Duration(microseconds: 500),(){
-            switch(coreApp.userStateApp){
-              case UserStateApp.parent:
-                context.push('/parentProfileScreen');
-                break;
-              case UserStateApp.organization:
-                context.push('/organizationProfileScreen');
-                break;
-            // case UserStateApp.minsots:
-            //   context.push('/parentProfileScreen');
-            //   break;
-              case UserStateApp.administrator:
-                context.push('/adminScreen');
-                break;
-              default:
-                break;
-            }
-          });
-        }),
-        child: BackgroundScaffold(child: Stack(
+    return BackgroundScaffold(child: Stack(
+      children: [
+        Header(coreApp: coreApp,),
+        Row(
           children: [
-            Header(coreApp: coreApp,),
-            Row(
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Spacer(),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Счастливый билет",
-                      style:
-                      defaultTextStyle(size: 40, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "Это портал бронирования места в лагере\nдля детей в любой лагерь страны",
-                      style: defaultTextStyle(size: 14),
-                    ),
-                    kDefaultVerticalPadding,
-                    kDefaultVerticalPadding,
-                    Container(
-                      width: HEIGHT * 5,
-                      height: HEIGHT,
-                      child: ElevatedButton(
-                          onPressed: () => context.go("/registrationScreen"),
-                          style: ElevatedButton.styleFrom(
-                              elevation: 8,
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  side: BorderSide(color: Colors.white))),
-                          child: Text(
-                            "Зарегистрироваться",
-                            style: defaultTextStyle(size: 14, color: primary),
-                          )),
-                    ),
-                    kDefaultVerticalPadding,
-                    Container(
-                      width: HEIGHT * 5,
-                      height: HEIGHT,
-                      child: ElevatedButton(
-                          onPressed: () => context.go("/camps"),
-                          style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              backgroundColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  side: const BorderSide(color: Colors.white))),
-                          child: Text(
-                            "Посмотреть лагеря",
-                            style: defaultTextStyle(size: 14, color: Colors.white),
-                          )),
-                    )
-                  ],
+                Text(
+                  "Счастливый билет",
+                  style:
+                  defaultTextStyle(size: 40, fontWeight: FontWeight.bold),
                 ),
-                const Spacer(
-                  flex: 2,
+                Text(
+                  "Это портал бронирования места в лагере\nдля детей в любой лагерь страны",
+                  style: defaultTextStyle(size: 14),
                 ),
-                Image.asset(
-                  RoundedSunPng,
-                  width: MAX_WIDTH / 4,
+                kDefaultVerticalPadding,
+                kDefaultVerticalPadding,
+                Container(
+                  width: HEIGHT * 5,
+                  height: HEIGHT,
+                  child: ElevatedButton(
+                      onPressed: () => context.go("/registrationScreen"),
+                      style: ElevatedButton.styleFrom(
+                          elevation: 8,
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide(color: Colors.white))),
+                      child: Text(
+                        "Зарегистрироваться",
+                        style: defaultTextStyle(size: 14, color: primary),
+                      )),
                 ),
-                const Spacer(),
+                kDefaultVerticalPadding,
+                Container(
+                  width: HEIGHT * 5,
+                  height: HEIGHT,
+                  child: ElevatedButton(
+                      onPressed: () => context.go("/camps"),
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: const BorderSide(color: Colors.white))),
+                      child: Text(
+                        "Посмотреть лагеря",
+                        style: defaultTextStyle(size: 14, color: Colors.white),
+                      )),
+                )
               ],
-            )
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+            Image.asset(
+              RoundedSunPng,
+              width: MAX_WIDTH / 4,
+            ),
+            const Spacer(),
           ],
-        ))
-    );
+        )
+      ],
+    ));
   }
 }
 
@@ -184,27 +162,7 @@ class Header extends StatelessWidget {
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed:  (){
-                switch(coreApp.userStateApp){
-                  case UserStateApp.parent:
-                    context.push('/parentProfileScreen');
-                    break;
-                  case UserStateApp.organization:
-                    context.push('/organizationProfileScreen');
-                    break;
-                // case UserStateApp.minsots:
-                //   context.push('/parentProfileScreen');
-                //   break;
-                  case UserStateApp.administrator:
-                    context.push('/adminScreen');
-                    break;
-                  case UserStateApp.noAuthorized:
-                    context.go('/loginScreen');
-                    break;
-                  default:
-                    break;
-                }
-              },
+              onPressed:  ()=>context.go('/loginScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Профиль", style: defaultTextStyle())),

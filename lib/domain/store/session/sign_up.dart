@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:dooking/data/models/parent.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -69,12 +70,11 @@ abstract class _SignUp with Store {
         errorMessage = "Неверный пароль";
         return;
       }
-      // final tokenSet = await _authRepos.getTokenSet(TokenRequest("signin",null, _email,_password));
-      // _tokenRepos
-      //   ..setAccess(tokenSet.accessToken)
-      //   ..setRefresh(tokenSet.refreshToken);
-      // final UserStateApp state = UserStateApp.values.singleWhere((element) => element.name == tokenSet.userType);
-      // _coreApp.userStateApp = state;
+      final tokenSet = await _authRepos.reg(_email, _password, isOrganization);
+      _tokenRepos
+        ..setAccess(tokenSet.accessToken)
+        ..setRefresh(tokenSet.refreshToken);
+      coreApp.userStateApp = tokenSet.userState;
     }on DioError catch(e){
       errorMessage = e.response?.data?.toString();
     }

@@ -1,3 +1,4 @@
+import 'package:dooking/domain/store/app/core_app.dart';
 import 'package:dooking/presentation/admin/AdminPanelScreen.dart';
 import 'package:dooking/presentation/admin/ApproveCampScreen.dart';
 import 'package:dooking/presentation/camp_card_screen/CampCardScreen.dart';
@@ -16,15 +17,24 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'di/location.dart';
+import 'domain/model/user_state_app.dart';
+import 'domain/use_case/restore_session.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  runApp(const MyApp());
+  await configureDependencies();
+  await _initApp();
+  runApp(MyApp(coreApp: getIt.get(),));
+}
+
+Future<void> _initApp() async {
+  final restoreSessionUseCase= getIt.get<RestoreSessionUseCase>();
+  await restoreSessionUseCase.execute();
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final CoreApp coreApp;
+  MyApp({super.key, required this.coreApp});
 
   @override
   Widget build(BuildContext context) {
@@ -37,96 +47,115 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+  String get initialLocation {
+    switch(coreApp.userStateApp){
+      case UserStateApp.noAuthorized:
+        return '/';
+      case UserStateApp.parent:
+        return '/parentProfileScreen';
+      case UserStateApp.organization:
+        return '/';
+      case UserStateApp.minsots:
+        return '/';
+      case UserStateApp.administrator:
+        return '/';
+    }
+  }
+
+  late final GoRouter _router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/detailedCampScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return DetailedCampScreen();
+        },
+      ),
+      GoRoute(
+        path: '/paymentScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return PaymentScreen();
+        },
+      ),
+      GoRoute(
+        path: '/childListScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return ChildListScreen();
+        },
+      ),
+      GoRoute(
+        path: '/childProfileScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return ChildProfileScreen();
+        },
+      ),
+      GoRoute(
+        path: '/camps',
+        builder: (BuildContext context, GoRouterState state) {
+          return CampsScreen();
+        },
+      ),
+      GoRoute(
+        path: '/campCardScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return CampCardScreen();
+        },
+      ),
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return WelcomeScreen(
+            coreApp: getIt.get(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/loginScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return LoginScreen(signIn: getIt.get());
+        },
+      ),
+      GoRoute(
+        path: '/registrationScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return RegistrationScreen(signUp: getIt.get());
+        },
+      ),
+      GoRoute(
+        path: '/adminScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return AdminPanelScreen();
+        },
+      ),
+      GoRoute(
+        path: '/adminScreen/approve',
+        builder: (BuildContext context, GoRouterState state) {
+          return ApproveCampScreen();
+        },
+      ),
+      GoRoute(
+        path: '/sitizen_RF',
+        builder: (BuildContext context, GoRouterState state) {
+          return CitizenRfScreen();
+        },
+      ),
+      GoRoute(
+        path: '/organizationProfileScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return OrganizationProfileScreen();
+        },
+      ),
+      GoRoute(
+        path: '/parentProfileScreen',
+        builder: (BuildContext context, GoRouterState state) {
+          return ParentProfileScreen(parentForm: getIt.get(),);
+        },
+      ),
+    ],
+  );
+
 }
 
-final GoRouter _router = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-      path: '/detailedCampScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return DetailedCampScreen();
-      },
-    ),
-    GoRoute(
-      path: '/paymentScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return PaymentScreen();
-      },
-    ),
-    GoRoute(
-      path: '/childListScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return ChildListScreen();
-      },
-    ),
-    GoRoute(
-      path: '/childProfileScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return ChildProfileScreen();
-      },
-    ),
-    GoRoute(
-      path: '/camps',
-      builder: (BuildContext context, GoRouterState state) {
-        return CampsScreen();
-      },
-    ),
-    GoRoute(
-      path: '/campCardScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return CampCardScreen();
-      },
-    ),
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return WelcomeScreen(
-          coreApp: getIt.get(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/loginScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return LoginScreen(signIn: getIt.get());
-      },
-    ),
-    GoRoute(
-      path: '/registrationScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return RegistrationScreen(signUp: getIt.get());
-      },
-    ),
-    GoRoute(
-      path: '/adminScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return AdminPanelScreen();
-      },
-    ),
-    GoRoute(
-      path: '/adminScreen/approve',
-      builder: (BuildContext context, GoRouterState state) {
-        return ApproveCampScreen();
-      },
-    ),
-    GoRoute(
-      path: '/sitizen_RF',
-      builder: (BuildContext context, GoRouterState state) {
-        return CitizenRfScreen();
-      },
-    ),
-    GoRoute(
-      path: '/organizationProfileScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return OrganizationProfileScreen();
-      },
-    ),
-    GoRoute(
-      path: '/parentProfileScreen',
-      builder: (BuildContext context, GoRouterState state) {
-        return ParentProfileScreen();
-      },
-    ),
-  ],
-);
+
+
+

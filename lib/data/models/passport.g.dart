@@ -11,8 +11,7 @@ Passport _$PassportFromJson(Map<String, dynamic> json) => Passport(
       json['number'] as int,
       json['dateOfGetting'] as String,
       json['issueName'] as String,
-      json['dateOfEnding'] as String,
-      json['isRussianPassport'] as String,
+      json['isRussianPassport'] as bool,
     );
 
 Map<String, dynamic> _$PassportToJson(Passport instance) => <String, dynamic>{
@@ -20,6 +19,5 @@ Map<String, dynamic> _$PassportToJson(Passport instance) => <String, dynamic>{
       'number': instance.number,
       'dateOfGetting': instance.dateOfGetting,
       'issueName': instance.issueName,
-      'dateOfEnding': instance.dateOfEnding,
       'isRussianPassport': instance.isRussianPassport,
     };

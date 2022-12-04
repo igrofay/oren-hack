@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dooking/domain/model/user_state_app.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
@@ -25,7 +26,7 @@ class RegistrationScreen extends StatelessWidget {
               (_) => signUp.coreApp.userStateApp,
               (state) {
                 if(state != UserStateApp.noAuthorized){
-                  context.push('/organizationProfileScreen');
+                  context.push('/parentProfileScreen');
                 }
               }
       ),
@@ -76,7 +77,7 @@ class RegistrationScreen extends StatelessWidget {
                                     size: 32, fontWeight: FontWeight.bold),
                               ),
                               CupertinoButton(
-                                onPressed: () {},
+                                onPressed: () => context.push('/loginScreen'),
                                 padding: EdgeInsets.zero,
                                 minSize: 0,
                                 child: Text(

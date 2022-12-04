@@ -14,7 +14,7 @@ Camp _$CampFromJson(Map<String, dynamic> json) => Camp(
           .map((e) => Shift.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['season'] as String,
-      Address.fromJson(json['address'] as Map<String, dynamic>),
+      json['address'] as String,
       json['infrastructure'] as String,
     );
 

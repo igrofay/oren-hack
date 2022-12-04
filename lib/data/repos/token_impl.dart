@@ -11,7 +11,7 @@ class TokenReposImpl implements TokenRepos {
   TokenReposImpl(this._sharedPreferences);
 
   static const String _accessTokenKey = "ACCESS_TOKEN_KEY";
-  static const String _refreshTokenKey = "ACCESS_TOKEN_KEY";
+  static const String _refreshTokenKey = "REFRESH_TOKEN_KEY";
 
   @override
   String getAccess() => _sharedPreferences.getString(_accessTokenKey) ?? '';

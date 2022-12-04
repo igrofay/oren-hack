@@ -1,30 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'passport.dart';
-import 'address.dart';
 
 part 'parent.g.dart';
 
 @JsonSerializable()
 class Parent {
-  String firstName;
-  String secondName;
-  String lastName;
+  String fio;
   String parentStatus;
   String citizenCountry;
   String birthday;
   Passport passport;
-  Address address;
+  String address;
   String snils;
   String phoneNumber;
   String email;
-  List<String> childs;
 
 
   Parent(
-      this.firstName,
-      this.secondName,
-      this.lastName,
+      this.fio,
       this.parentStatus,
       this.citizenCountry,
       this.birthday,
@@ -32,8 +26,7 @@ class Parent {
       this.address,
       this.snils,
       this.phoneNumber,
-      this.email,
-      this.childs);
+      this.email);
 
   factory Parent.fromJson(Map<String, dynamic> json) => _$ParentFromJson(json);
 

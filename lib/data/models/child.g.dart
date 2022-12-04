@@ -15,7 +15,7 @@ Child _$ChildFromJson(Map<String, dynamic> json) => Child(
       Passport.fromJson(json['passport'] as Map<String, dynamic>),
       BirthCertificate.fromJson(
           json['birthCertificate'] as Map<String, dynamic>),
-      Address.fromJson(json['address'] as Map<String, dynamic>),
+      json['address'] as String,
       json['snils'] as String,
       json['phoneNumber'] as String,
       json['email'] as String,

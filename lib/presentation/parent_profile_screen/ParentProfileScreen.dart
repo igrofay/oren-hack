@@ -9,34 +9,44 @@ import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobx/mobx.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../../domain/store/profile_parent/parent_form.dart';
+
 class ParentProfileScreen extends StatelessWidget {
-  const ParentProfileScreen({super.key});
+  final ParentForm parentForm;
+  const ParentProfileScreen({super.key, required this.parentForm});
 
   @override
   Widget build(BuildContext context) {
     return BackgroundScaffold(
         child: SingleChildScrollView(
-      child: Column(
-        children: [
-          Header(),
-          Text(
-            "Профиль родителя",
-            style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
-          ),
-          Flex(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            direction: Axis.horizontal,
-            children: [common(), kDefaultHorizontalPadding, documents()],
-          ),
-          addressAndNexButton(),
-          kDefaultVerticalPadding,
-          kDefaultVerticalPadding,
-          kDefaultVerticalPadding,
-        ],
-      ),
+      child: Observer(builder: (_){
+        return parentForm.state == StateParentForm.load
+            ? const SizedBox()
+            : Column(
+          children: [
+            Header(parentForm: parentForm,),
+            Text(
+              "Профиль родителя",
+              style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
+            ),
+            Flex(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              direction: Axis.horizontal,
+              children: [common(), kDefaultHorizontalPadding, documents()],
+            ),
+            addressAndNexButton(),
+            kDefaultVerticalPadding,
+            kDefaultVerticalPadding,
+            kDefaultVerticalPadding,
+          ],
+        );
+      })
     ));
   }
 
@@ -47,16 +57,19 @@ class ParentProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               HeaderTitle("Адрес"),
-              CustomTextField(hintText: "Место жительства"),
+              CustomTextField(
+                  hintText: "Место жительства",
+                onChanged: (value)=> parentForm.address = value,
+              ),
               kDefaultVerticalPadding,
               LayoutBuilder(builder: (_, con) {
                 return SizedBox(
                   width: con.maxWidth / 2,
                   child: CustomButton(
-                    text: "Продолжить",
+                    text: "Сохранить",
                     textColor: primary,
                     buttonColor: Colors.white,
-                    onPressed: () {},
+                    onPressed: ()=> parentForm.save(),
                   ),
                 );
               })
@@ -80,18 +93,25 @@ class ParentProfileScreen extends StatelessWidget {
           }),
           CustomTextField(
             hintText: "Серия паспорта",
+            onChanged: (value)=> parentForm.seriesPassport = value,
+            isError: parentForm.isErrorSeriesPassport,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Номер паспорта",
+            onChanged: (value)=> parentForm.numberPassport = value,
+              isError: parentForm.isErrorNumberPassport
           ),
           kDefaultVerticalPadding,
           Stack(
             children: [
-              CustomTextField(
-                hintText: "Дата выдачи",
-                readObly: true,
-              ),
+              Observer(builder: (_){
+                return CustomTextField(
+                  hintText: "Дата выдачи",
+                  readObly: true,
+                  text: parentForm.dateOfGettingPassport,
+                );
+              }),
               Positioned(
                   top: 0,
                   bottom: 0,
@@ -106,18 +126,28 @@ class ParentProfileScreen extends StatelessWidget {
                   )),
               Positioned.fill(
                   child: GestureDetector(
-                onTap: () => print("lllla"),
+                onTap: () => runInAction((){
+                  parentForm.showCalendarDateOfGettingPassport = ! parentForm.showCalendarDateOfGettingPassport;
+                }),
               )),
             ],
           ),
-          calendar(true, (_) {}),
+          Observer(
+            builder: (context) {
+              return calendar(parentForm.showCalendarDateOfGettingPassport, (value) {
+                runInAction(() => parentForm.dateOfGettingPassport = value.value.toString());
+              });
+            }
+          ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Кем выдан",
+            onChanged: (value)=> parentForm.issueName,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
+            onChanged: (value)=> parentForm.snils,
           ),
         ],
       ),
@@ -139,23 +169,36 @@ class ParentProfileScreen extends StatelessWidget {
           }),
           CustomTextField(
             hintText: "ФИО",
+            onChanged: (value) => parentForm.fio = value,
+            isError: parentForm.isErrorAddress,
           ),
           kDefaultVerticalPadding,
           CustomDropdown(items: [
-            DropdownMenuItemData(name: "ok", value: "ok"),
-            DropdownMenuItemData(name: "ok1", value: "ok1"),
-            DropdownMenuItemData(name: "ok2", value: "ok2")
-          ], onChanged: (_) {}, value: "ok"),
+            DropdownMenuItemData(name: "Родитель", value: "Родитель"),
+            DropdownMenuItemData(
+                name: "Законный представитель ребенка",
+                value: "Законный представитель ребенка"
+            )
+          ], onChanged: (value) {
+            if(value== null) return;
+            runInAction(()=> parentForm.parentStatus = value);
+          }, value: parentForm.parentStatus),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Гражданство",
+            onChanged: (value) => parentForm.citizenCountry = value,
           ),
           kDefaultVerticalPadding,
           Stack(
             children: [
-              CustomTextField(
-                hintText: "Дата рождения",
-                readObly: true,
+              Builder(
+                builder: (context) {
+                  return CustomTextField(
+                    hintText: "Дата рождения",
+                    readObly: true,
+                    text: parentForm.birthday,
+                  );
+                }
               ),
               Positioned(
                   top: 0,
@@ -171,20 +214,29 @@ class ParentProfileScreen extends StatelessWidget {
                   )),
               Positioned.fill(
                   child: GestureDetector(
-                onTap: () => print("lllla"),
+                onTap: () => runInAction(() => parentForm.showCalendarBirthday = !parentForm.showCalendarBirthday),
               )),
             ],
           ),
-          calendar(true, (_) {}),
+          Observer(builder: (_){
+            return calendar(parentForm.showCalendarBirthday, (value) {
+              runInAction(() => parentForm.birthday = value.value.toString());
+            });
+          }),
           kDefaultVerticalPadding,
-          CustomTextField(hintText: "Номер телефона")
+          CustomTextField(
+              hintText: "Номер телефона",
+            onChanged: (value)=>parentForm.phoneNumber = value,
+            isError: parentForm.isErrorPhoneNumber,
+          )
         ],
       ),
     ));
   }
 
+
   AnimatedContainer calendar(bool visible,
-      Function(DateRangePickerSelectionChangedArgs)? onSelectionChanged) {
+      DateRangePickerSelectionChangedCallback onSelectionChanged) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: visible ? null : 0,
@@ -218,8 +270,9 @@ class ParentProfileScreen extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
+  final ParentForm parentForm;
   const Header({
-    Key? key,
+    Key? key, required this.parentForm,
   }) : super(key: key);
 
   @override
@@ -229,7 +282,7 @@ class Header extends StatelessWidget {
           const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue),
       height: HEIGHT,
       child: Stack(
-        children: [sun(), nav(), reg()],
+        children: [sun(), nav(context), reg()],
       ),
     );
   }
@@ -239,35 +292,15 @@ class Header extends StatelessWidget {
       top: 0,
       bottom: 0,
       right: 0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CupertinoButton(
-            onPressed: () {},
-            padding: EdgeInsets.zero,
-            minSize: 0,
-            child: Text(
-              "Зарегистрироваться",
-              style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {},
-            minSize: 0,
-            child: Text(
-              "Или войдите в аккаунт",
-              style: defaultTextStyle(size: 13, fontWeight: FontWeight.bold)
-                  .copyWith(decoration: TextDecoration.underline),
-            ),
-          ),
-        ],
-      ),
+      child: Observer(builder: (_){
+        return parentForm.state == StateParentForm.success
+            ? Text(parentForm.email, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),)
+            : const SizedBox();
+      })
     );
   }
 
-  Widget nav() {
+  Widget nav(BuildContext context) {
     return Positioned(
       top: 0,
       bottom: 0,
@@ -278,19 +311,19 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CupertinoButton(
-              onPressed: () {},
+              onPressed: ()=> context.go('/camps'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: () {},
+              onPressed: ()=> context.go('/childListScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Дети", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: () {},
+              onPressed: null,
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Профиль", style: defaultTextStyle())),

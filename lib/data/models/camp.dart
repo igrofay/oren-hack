@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:dooking/data/models/address.dart';
 import 'package:dooking/data/models/shift.dart';
 
 part 'camp.g.dart';
@@ -12,7 +11,7 @@ class Camp {
   String description;
   List<Shift> shifts;
   String season;
-  Address address;
+  String address;
   String infrastructure;
 
 

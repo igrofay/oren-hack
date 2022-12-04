@@ -5,13 +5,13 @@ part 'token_request.g.dart';
 @JsonSerializable()
 class TokenRequest {
 
-  String grandType;
+  String grantType;
   String? refreshToken;
   String? username;
   String? password;
 
 
-  TokenRequest(this.grandType, [this.refreshToken, this.username, this.password]);
+  TokenRequest(this.grantType, [this.refreshToken, this.username, this.password]);
 
   factory TokenRequest.fromJson(Map<String, dynamic> json) =>
       _$TokenRequestFromJson(json);

@@ -2,7 +2,6 @@ import 'package:dooking/data/models/birth_certificate.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'passport.dart';
-import 'address.dart';
 
 part 'child.g.dart';
 
@@ -15,7 +14,7 @@ class Child {
   String birthday;
   Passport passport;
   BirthCertificate birthCertificate;
-  Address address;
+  String address;
   String snils;
   String phoneNumber;
   String email;
