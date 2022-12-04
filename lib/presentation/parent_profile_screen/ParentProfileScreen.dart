@@ -4,13 +4,18 @@ import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomDropdown.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
 import 'package:dooking/presentation/custom_widgets/Title.dart';
+import 'package:dooking/presentation/custom_widgets/calendar.dart';
 import 'package:dooking/presentation/utils/Background.dart';
+import 'package:dooking/presentation/custom_widgets/dateField.dart';
 import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
+import 'package:dooking/res/utils/formatters/FromSampleFormatter.dart';
+import 'package:dooking/res/utils/formatters/NumberTextInputFormatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -61,15 +66,10 @@ class ParentProfileScreen extends StatelessWidget {
             children: [
               HeaderTitle("Адрес"),
               CustomTextField(
-<<<<<<< HEAD
                 hintText: "Место жительства",
                 onChanged: (value) => parentForm.address = value,
-=======
-                  hintText: "Место жительства",
-                onChanged: (value)=> parentForm.address = value,
                 isError: parentForm.isErrorAddress,
                 text: parentForm.address,
->>>>>>> 2f86b93404ac122875033d1237efc5c478388831
               ),
               kDefaultVerticalPadding,
               LayoutBuilder(builder: (_, con) {
@@ -103,23 +103,19 @@ class ParentProfileScreen extends StatelessWidget {
           }),
           CustomTextField(
             hintText: "Серия паспорта",
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (value) => parentForm.seriesPassport = value,
             isError: parentForm.isErrorSeriesPassport,
             text: parentForm.seriesPassport,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
-<<<<<<< HEAD
-              hintText: "Номер паспорта",
-              onChanged: (value) => parentForm.numberPassport = value,
-              isError: parentForm.isErrorNumberPassport),
-=======
             hintText: "Номер паспорта",
-            onChanged: (value)=> parentForm.numberPassport = value,
-              isError: parentForm.isErrorNumberPassport,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            onChanged: (value) => parentForm.numberPassport = value,
+            isError: parentForm.isErrorNumberPassport,
             text: parentForm.numberPassport,
           ),
->>>>>>> 2f86b93404ac122875033d1237efc5c478388831
           kDefaultVerticalPadding,
           Stack(
             children: [
@@ -159,24 +155,20 @@ class ParentProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Кем выдан",
-<<<<<<< HEAD
-            onChanged: (value) => parentForm.issueName,
-=======
-            onChanged: (value)=> parentForm.issueName = value,
-            text:  parentForm.issueName,
-            isError:  parentForm.isErrorIssueName,
->>>>>>> 2f86b93404ac122875033d1237efc5c478388831
+            onChanged: (value) => parentForm.issueName = value,
+            text: parentForm.issueName,
+            isError: parentForm.isErrorIssueName,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
-<<<<<<< HEAD
-            onChanged: (value) => parentForm.snils,
-=======
-            onChanged: (value)=> parentForm.snils = value,
-            text:parentForm.snils,
-            isError:  parentForm.isErrorSnils,
->>>>>>> 2f86b93404ac122875033d1237efc5c478388831
+            inputFormatters: [
+              FromSampleFormatter(
+                  sample: "XXX XXX XXX XX", seperator: " ", isDigits: true)
+            ],
+            onChanged: (value) => parentForm.snils = value,
+            text: parentForm.snils,
+            isError: parentForm.isErrorSnils,
           ),
         ],
       ),
@@ -219,7 +211,7 @@ class ParentProfileScreen extends StatelessWidget {
           CustomTextField(
             hintText: "Гражданство",
             onChanged: (value) => parentForm.citizenCountry = value,
-            isError:parentForm.isErrorCitizenCountry,
+            isError: parentForm.isErrorCitizenCountry,
             text: parentForm.citizenCountry,
           ),
           kDefaultVerticalPadding,
@@ -258,60 +250,12 @@ class ParentProfileScreen extends StatelessWidget {
             hintText: "Номер телефона",
             onChanged: (value) => parentForm.phoneNumber = value,
             isError: parentForm.isErrorPhoneNumber,
-            text:parentForm.phoneNumber,
+            text: parentForm.phoneNumber,
+            inputFormatters: [NumberTextInputFormatter()],
           )
         ],
       ),
     ));
-  }
-
-  Container dateField(String hint, String text) {
-    return Container(
-      height: HEIGHT,
-      decoration: BoxDecoration(
-          color: Colors.white24,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white24, width: 2)),
-      child: Center(
-        child: Text(
-          text == "" ? hint : text,
-          style: defaultTextStyle(color: text == "" ? Colors.white30 : null),
-        ),
-      ),
-    );
-  }
-
-  AnimatedContainer calendar(bool visible,
-      DateRangePickerSelectionChangedCallback onSelectionChanged) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      height: visible ? null : 0,
-      child: SfDateRangePicker(
-        selectionColor: Colors.amber,
-        todayHighlightColor: Colors.transparent,
-        monthCellStyle: const DateRangePickerMonthCellStyle(
-            todayTextStyle: TextStyle(color: Colors.white70),
-            textStyle: TextStyle(color: Colors.white70)),
-        yearCellStyle: const DateRangePickerYearCellStyle(
-            textStyle: TextStyle(color: Colors.white)),
-        headerStyle: const DateRangePickerHeaderStyle(
-            textStyle:
-                TextStyle(color: Colors.white, decorationColor: Colors.white)),
-        monthViewSettings: const DateRangePickerMonthViewSettings(
-            viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                textStyle: TextStyle(color: Colors.white)),
-            weekNumberStyle: DateRangePickerWeekNumberStyle(
-                textStyle: TextStyle(color: Colors.white))),
-        rangeTextStyle: const TextStyle(color: Colors.white),
-        selectionTextStyle: const TextStyle(color: Colors.white),
-        onSelectionChanged: onSelectionChanged,
-        selectionMode: DateRangePickerSelectionMode.single,
-        initialSelectedDate: DateTime.now(),
-        // initialSelectedRange: PickerDateRange(
-        //     DateTime.now().subtract(const Duration(days: 4)),
-        //     DateTime.now().add(const Duration(days: 3))),
-      ),
-    );
   }
 }
 
@@ -339,9 +283,11 @@ class Header extends StatelessWidget {
         top: 0,
         bottom: 0,
         right: 0,
-        child: Text(
-          getIt.get<CoreApp>().emailUser,
-          style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
+        child: Center(
+          child: Text(
+            getIt.get<CoreApp>().emailUser,
+            style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),
+          ),
         ));
   }
 
