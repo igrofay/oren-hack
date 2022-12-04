@@ -5,7 +5,10 @@ import 'package:dooking/presentation/utils/Background.dart';
 import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
+import 'package:dooking/res/utils/formatters/CardNumberFormatter.dart';
+import 'package:dooking/res/utils/formatters/FromSampleFormatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
@@ -27,15 +30,36 @@ class PaymentScreen extends StatelessWidget {
                 children: [
                   HeaderTitle("Введите данные карты"),
                   kDefaultVerticalPadding,
-                  CustomTextField(hintText: "Номер карты"),
+                  CustomTextField(
+                    hintText: "Номер карты",
+                    maxLenght: 19,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CardNumberFormatter(),
+                    ],
+                  ),
                   kDefaultVerticalPadding,
                   Flex(
                     direction: Axis.horizontal,
                     children: [
-                      Flexible(child: CustomTextField(hintText: "01/01")),
+                      Flexible(
+                          child: CustomTextField(
+                        hintText: "01/01",
+                        maxLenght: 5,
+                        inputFormatters: [
+                          FromSampleFormatter(
+                              sample: "XX/XX", seperator: "/", isDigits: true)
+                        ],
+                      )),
                       kDefaultHorizontalPadding,
                       Flexible(
-                        child: CustomTextField(hintText: "CVV"),
+                        child: CustomTextField(
+                          hintText: "CVV",
+                          maxLenght: 3,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
                       )
                     ],
                   ),

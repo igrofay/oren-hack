@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
       this.bottomMargin = 0.0,
       this.isPassword = false,
       this.onChanged,
+      this.maxLenght,
       this.isError = false,
       this.readObly = false,
       this.onFieldSubmitted,
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
       : super(key: key);
 
   late String? text;
+  late int? maxLenght = 100000;
   late bool readObly;
   late bool isPassword;
   late double height;
@@ -59,7 +61,10 @@ class CustomTextField extends StatelessWidget {
           textInputAction: TextInputAction.newline,
           onFieldSubmitted: onFieldSubmitted,
           onEditingComplete: onEditingComplete,
-          inputFormatters: inputFormatters,
+          inputFormatters: <TextInputFormatter>[
+            ...?inputFormatters,
+            LengthLimitingTextInputFormatter(maxLenght),
+          ],
           textAlign: TextAlign.center,
           minLines: 1,
           style: const TextStyle(

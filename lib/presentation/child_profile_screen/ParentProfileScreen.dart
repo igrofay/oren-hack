@@ -7,8 +7,10 @@ import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
+import 'package:dooking/res/utils/formatters/FromSampleFormatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -86,10 +88,16 @@ class ChildProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Серия паспорта",
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Номер паспорта",
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
           ),
           kDefaultVerticalPadding,
           Stack(
@@ -124,6 +132,10 @@ class ChildProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
+            inputFormatters: [
+              FromSampleFormatter(
+                  sample: "XXX XXX XXX XX", seperator: " ", isDigits: true)
+            ],
           ),
         ],
       ),
