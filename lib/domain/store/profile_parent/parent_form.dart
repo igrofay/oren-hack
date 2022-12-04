@@ -38,7 +38,9 @@ abstract class _ParentForm with Store{
        numberPassport = parentInfo.passport.number.toString();
        dateOfGettingPassport = parentInfo.passport.dateOfGetting;
        issueName = parentInfo.passport.issueName;
+       print(parentInfo.passport.issueName);
        snils = parentInfo.snils;
+       print(parentInfo.snils);
        address = parentInfo.address;
        state = StateParentForm.success;
      }catch(_){}
