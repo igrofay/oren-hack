@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../di/location.dart';
 import '../../domain/store/app/core_app.dart';
 import '../../domain/store/parent/children_parent.dart';
-import '../child_profile_screen/ParentProfileScreen.dart';
+import '../child_profile_screen/ChildProfileScreen.dart';
 
 class ChildListScreen extends StatelessWidget {
   final ChildrenParent childrenParent;
@@ -135,7 +135,7 @@ class Header extends StatelessWidget {
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: null,
+              onPressed: ()=> context.go('/childListScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Дети", style: defaultTextStyle())),

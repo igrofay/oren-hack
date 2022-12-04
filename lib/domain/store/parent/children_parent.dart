@@ -5,7 +5,10 @@ import 'package:dooking/domain/store/parent/child_form.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../di/location.dart';
+import '../../model/user_state_app.dart';
 import '../../repos/parent.dart';
+import '../app/core_app.dart';
 
 part 'children_parent.g.dart';
 
@@ -29,13 +32,17 @@ abstract class _ChildrenParent with Store{
 
   @action
   Future<void> _load() async {
-    final answer = await _parentRepos.getChildList();
-    childList.addAll(answer);
+    try{
+      final answer = await _parentRepos.getChildList();
+      childList.addAll(answer);
+    }catch(e){}
   }
 
   @action
   void addChild(){
-    stateChildrenParent = StateChildrenParent.inputForm;
+    if(getIt.get<CoreApp>().userStateApp == UserStateApp.parent){
+      stateChildrenParent = StateChildrenParent.inputForm;
+    }
   }
 
   @action

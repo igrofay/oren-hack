@@ -3,6 +3,7 @@ import 'package:dooking/data/models/reg_body.dart';
 import 'package:dooking/data/models/token_request.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../models/childIdResponse.dart';
 import '../models/parent.dart';
 import '../models/child.dart';
 import '../models/token_set.dart';
@@ -34,4 +35,8 @@ abstract class RestClient {
 
   @GET("/profile/child/byParent")
   Future<List<Child>> getChildList();
+
+  @PUT("/profile/child")
+  Future<ChildIdResponse> putChild(@Body() Child child);
+
 }

@@ -5,7 +5,7 @@ part 'birth_certificate.g.dart';
 @JsonSerializable()
 class BirthCertificate {
   bool isRussian;
-  int series;
+  String series;
   int number;
   String dateOfGetting;
   String issueName;

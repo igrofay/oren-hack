@@ -22,26 +22,27 @@ class ChildProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundScaffold(
-        child: SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(
-            "Профиль ребенка",
-            style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
-          ),
-          Flex(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            direction: Axis.horizontal,
-            children: [common(), kDefaultHorizontalPadding, documents()],
-          ),
-          addressAndNexButton(),
-          kDefaultVerticalPadding,
-          kDefaultVerticalPadding,
-          kDefaultVerticalPadding,
-        ],
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+      children: [
+        Text(
+          "Профиль ребенка",
+          style: defaultTextStyle(size: 32, fontWeight: FontWeight.bold),
+        ),
+        Flex(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          direction: Axis.horizontal,
+          children: [common(), kDefaultHorizontalPadding, documents()],
+        ),
+        addressAndNexButton(),
+        kDefaultVerticalPadding,
+        kDefaultVerticalPadding,
+        kDefaultVerticalPadding,
+      ],
+        ),
       ),
-    ));
+    );
   }
 
   LayoutBuilder addressAndNexButton() {

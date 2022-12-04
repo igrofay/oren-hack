@@ -1,8 +1,12 @@
-# dooking
+# Установка Flutter
 
-A new Flutter project.
+Пошаговая инструкция для скачивания https://metanit.com/dart/flutter/1.1.php
 
-## Getting Started
+## Проблема работы Dio 
+
+Dio не может работать 
+
+![](images/solution.jpg)
 
 This project is a starting point for a Flutter application.
 

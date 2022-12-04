@@ -29,6 +29,13 @@ class ParentReposImpl implements ParentRepos{
     return await _restClient.getChildList();
   }
 
+  @override
+  Future<int> putNewChild(Child child) async {
+    return (await _restClient.putChild(child)).childId;
+  }
+
+
+
 
 
 }

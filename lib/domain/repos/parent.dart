@@ -8,4 +8,5 @@ abstract class ParentRepos{
   Future<Parent> getParent();
   Future<void> saveParent(Parent parent);
   Future<List<Child>> getChildList();
+  Future<int> putNewChild(Child child);
 }

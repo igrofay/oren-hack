@@ -9,7 +9,7 @@ part of 'birth_certificate.dart';
 BirthCertificate _$BirthCertificateFromJson(Map<String, dynamic> json) =>
     BirthCertificate(
       json['isRussian'] as bool,
-      json['series'] as int,
+      json['series'] as String,
       json['number'] as int,
       json['dateOfGetting'] as String,
       json['issueName'] as String,
