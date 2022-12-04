@@ -1,3 +1,4 @@
+import 'package:dooking/presentation/camps_screen/CampsScreen.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/utils/Background.dart';
 import 'package:dooking/res/constants.dart';
@@ -36,7 +37,7 @@ class DetailedCampScreen extends StatelessWidget {
                         strokeAlign: StrokeAlign.outside,
                         width: kDefaultHorizontalPaddingValue),
                     image: DecorationImage(
-                      image: AssetImage("assets/asset.png"),
+                      image: AssetImage(camps[current].image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -51,22 +52,21 @@ class DetailedCampScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Название лагеря",
+                          camps[current].name,
                           style: defaultTextStyle(
                               fontWeight: FontWeight.bold, size: 28),
                         ),
-                        Text(
-                            "Самый самыйСамый самыйСамый самыйСамый самыйСамый самый Самый самыйСамый самый",
+                        Text(camps[current].description,
                             style: defaultTextStyle(size: 18)),
                         kDefaultVerticalPadding,
                         Text(
-                          "• Летний сезон",
+                          camps[current].season,
                           style: defaultTextStyle(
                               fontWeight: FontWeight.bold, size: 18),
                         ),
                         kDefaultVerticalPadding,
                         Text(
-                          "2000 рублей",
+                          camps[current].price,
                           style: defaultTextStyle(
                               fontWeight: FontWeight.bold, size: 24),
                         ),
