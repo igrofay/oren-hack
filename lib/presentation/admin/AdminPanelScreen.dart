@@ -27,7 +27,7 @@ class AdminPanelScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           Expanded(
             child: ListView.builder(
-              itemCount: 20,
+              itemCount: 2,
               itemBuilder: (BuildContext context, int index) {
                 return CampItem();
               },
@@ -89,12 +89,6 @@ class Header extends StatelessWidget {
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Лагеря", style: defaultTextStyle())),
-          kDefaultHorizontalPadding,
-          CupertinoButton(
-              onPressed: () {},
-              minSize: 0,
-              padding: EdgeInsets.zero,
-              child: Text("Дети", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
               onPressed: () {},
