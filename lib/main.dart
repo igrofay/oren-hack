@@ -8,6 +8,7 @@ import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
 import 'package:dooking/presentation/login_screen/LoginScreen.dart';
 import 'package:dooking/presentation/organization_profile_screen/OrganizationProfileScreen.dart';
 import 'package:dooking/presentation/parent_profile_screen/ParentProfileScreen.dart';
+import 'package:dooking/presentation/payment_screen/PaymentScreen.dart';
 import 'package:dooking/presentation/registration_screen/RegistrationScreen.dart';
 import 'package:dooking/presentation/welcome_screen/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,12 @@ final GoRouter _router = GoRouter(
       path: '/detailedCampScreen',
       builder: (BuildContext context, GoRouterState state) {
         return DetailedCampScreen();
+      },
+    ),
+    GoRoute(
+      path: '/paymentScreen',
+      builder: (BuildContext context, GoRouterState state) {
+        return PaymentScreen();
       },
     ),
     GoRoute(

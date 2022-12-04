@@ -4,3 +4,4 @@ const RoundedSunSvg = "assets/roundedSun.svg";
 const NeMainBackgroundImage = "assets/back.png";
 const RoundedSunPng = "assets/roundedSun.png";
 const RoundedSunPrimary = "assets/primarySun.svg";
+const PaymentBackground = "assets/payBack.png";
