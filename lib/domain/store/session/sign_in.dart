@@ -65,6 +65,7 @@ abstract class _SignIn with Store{
         ..setAccess(tokenSet.accessToken)
         ..setRefresh(tokenSet.refreshToken);
       coreApp.userStateApp = tokenSet.userState;
+      coreApp.emailUser = _email;
     }on DioError catch(e){
       errorMessage = e.response?.data?.toString();
     }

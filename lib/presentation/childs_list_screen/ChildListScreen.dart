@@ -7,6 +7,10 @@ import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../di/location.dart';
+import '../../domain/store/app/core_app.dart';
 
 class ChildListScreen extends StatelessWidget {
   const ChildListScreen({super.key});
@@ -71,7 +75,7 @@ class Header extends StatelessWidget {
           const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue),
       height: HEIGHT,
       child: Stack(
-        children: [sun(), nav(), mail()],
+        children: [sun(), nav(context), mail()],
       ),
     );
   }
@@ -85,14 +89,14 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("mail",
+          Text(getIt.get<CoreApp>().emailUser,
               style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold)),
         ],
       ),
     );
   }
 
-  Widget nav() {
+  Widget nav(BuildContext context) {
     return Positioned(
       top: 0,
       bottom: 0,
@@ -103,19 +107,19 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CupertinoButton(
-              onPressed: () {},
+              onPressed: ()=> context.go('/camps'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: () {},
+              onPressed: null,
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Дети", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed: () {},
+              onPressed: ()=> context.go('/parentProfileScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Профиль", style: defaultTextStyle())),

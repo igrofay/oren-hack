@@ -12,4 +12,6 @@ abstract class _CoreApp with Store {
 
   @observable
   UserStateApp userStateApp = UserStateApp.noAuthorized;
+
+  String emailUser = "";
 }

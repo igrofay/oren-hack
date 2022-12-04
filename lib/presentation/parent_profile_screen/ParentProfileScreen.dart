@@ -1,3 +1,5 @@
+import 'package:dooking/di/location.dart';
+import 'package:dooking/domain/store/app/core_app.dart';
 import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomDropdown.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
@@ -135,7 +137,7 @@ class ParentProfileScreen extends StatelessWidget {
           Observer(
             builder: (context) {
               return calendar(parentForm.showCalendarDateOfGettingPassport, (value) {
-                runInAction(() => parentForm.dateOfGettingPassport = value.value.toString());
+                runInAction(() => parentForm.dateOfGettingPassport = value.value.toString().substring(0,10));
               });
             }
           ),
@@ -191,7 +193,7 @@ class ParentProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           Stack(
             children: [
-              Builder(
+              Observer(
                 builder: (context) {
                   return CustomTextField(
                     hintText: "Дата рождения",
@@ -220,7 +222,7 @@ class ParentProfileScreen extends StatelessWidget {
           ),
           Observer(builder: (_){
             return calendar(parentForm.showCalendarBirthday, (value) {
-              runInAction(() => parentForm.birthday = value.value.toString());
+              runInAction(() => parentForm.birthday = value.value.toString().substring(0,10));
             });
           }),
           kDefaultVerticalPadding,
@@ -292,11 +294,7 @@ class Header extends StatelessWidget {
       top: 0,
       bottom: 0,
       right: 0,
-      child: Observer(builder: (_){
-        return parentForm.state == StateParentForm.success
-            ? Text(parentForm.email, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),)
-            : const SizedBox();
-      })
+      child: Text(getIt.get<CoreApp>().emailUser, style: defaultTextStyle(size: 16, fontWeight: FontWeight.bold),)
     );
   }
 
