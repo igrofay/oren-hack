@@ -31,4 +31,7 @@ abstract class RestClient {
 
   @PUT("/profile/parent")
   Future<void> saveParentProfile(@Body() Parent parent);
+
+  @GET("/profile/child/byParent")
+  Future<List<Child>> getChildList();
 }

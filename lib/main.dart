@@ -4,7 +4,7 @@ import 'package:dooking/presentation/admin/ApproveCampScreen.dart';
 import 'package:dooking/presentation/camp_card_screen/CampCardScreen.dart';
 import 'package:dooking/presentation/camps_screen/CampsScreen.dart';
 import 'package:dooking/presentation/camps_screen/DetailedCampScreen.dart';
-import 'package:dooking/presentation/child_profile_screen/ParentProfileScreen.dart';
+import 'package:dooking/presentation/child_profile_screen/ChildProfileScreen.dart';
 import 'package:dooking/presentation/childs_list_screen/ChildListScreen.dart';
 import 'package:dooking/presentation/citizen_rf_screen/CitizenRfScreen.dart';
 import 'package:dooking/presentation/login_screen/LoginScreen.dart';
@@ -24,11 +24,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await _initApp();
-  runApp(MyApp(coreApp: getIt.get(),));
+  runApp(MyApp(
+    coreApp: getIt.get(),
+  ));
 }
 
 Future<void> _initApp() async {
-  final restoreSessionUseCase= getIt.get<RestoreSessionUseCase>();
+  final restoreSessionUseCase = getIt.get<RestoreSessionUseCase>();
   await restoreSessionUseCase.execute();
 }
 
@@ -47,8 +49,9 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
   String get initialLocation {
-    switch(coreApp.userStateApp){
+    switch (coreApp.userStateApp) {
       case UserStateApp.noAuthorized:
         return '/';
       case UserStateApp.parent:
@@ -80,7 +83,9 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/childListScreen',
         builder: (BuildContext context, GoRouterState state) {
-          return ChildListScreen();
+          return ChildListScreen(
+            childrenParent: getIt.get(),
+          );
         },
       ),
       GoRoute(
@@ -148,14 +153,11 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/parentProfileScreen',
         builder: (BuildContext context, GoRouterState state) {
-          return ParentProfileScreen(parentForm: getIt.get(),);
+          return ParentProfileScreen(
+            parentForm: getIt.get(),
+          );
         },
       ),
     ],
   );
-
 }
-
-
-
-

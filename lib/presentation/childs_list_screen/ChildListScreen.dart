@@ -6,14 +6,17 @@ import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../di/location.dart';
 import '../../domain/store/app/core_app.dart';
+import '../../domain/store/parent/children_parent.dart';
 
 class ChildListScreen extends StatelessWidget {
-  const ChildListScreen({super.key});
+  final ChildrenParent childrenParent;
+  const ChildListScreen({super.key, required this.childrenParent});
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +42,23 @@ class ChildListScreen extends StatelessWidget {
                   kDefaultVerticalPadding,
                   kDefaultVerticalPadding,
                   //через 3 точки сюда просо генерь список и все
-                  CustomButton(
-                      text: "Ребенок номер 1",
-                      textColor: Colors.white,
-                      buttonColor: Colors.transparent,
-                      onPressed: () {}),
-                  kDefaultVerticalPadding,
+                  Observer(builder: (_){
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: List.generate(
+                          childrenParent.childList.length,
+                              (index) =>  Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: CustomButton(
+                                    text: childrenParent.childList[index].fio,
+                                    textColor: Colors.white,
+                                    buttonColor: Colors.transparent,
+                                    onPressed: () {}
+                                ),
+                              )
+                      ),
+                    );
+                  }),
                   CustomButton(
                       text: "+ Добавить",
                       textColor: primary,

@@ -12,13 +12,18 @@ Child _$ChildFromJson(Map<String, dynamic> json) => Child(
       json['lastName'] as String,
       json['citizenCountry'] as String,
       json['birthday'] as String,
-      Passport.fromJson(json['passport'] as Map<String, dynamic>),
-      BirthCertificate.fromJson(
-          json['birthCertificate'] as Map<String, dynamic>),
+      json['passport'] == null
+          ? null
+          : Passport.fromJson(json['passport'] as Map<String, dynamic>),
+      json['birthCertificate'] == null
+          ? null
+          : BirthCertificate.fromJson(
+              json['birthCertificate'] as Map<String, dynamic>),
       json['address'] as String,
       json['snils'] as String,
       json['phoneNumber'] as String,
       json['email'] as String,
+      json['id'] as int?,
     );
 
 Map<String, dynamic> _$ChildToJson(Child instance) => <String, dynamic>{
@@ -33,4 +38,5 @@ Map<String, dynamic> _$ChildToJson(Child instance) => <String, dynamic>{
       'snils': instance.snils,
       'phoneNumber': instance.phoneNumber,
       'email': instance.email,
+      'id': instance.id,
     };

@@ -12,12 +12,13 @@ class Child {
   String lastName;
   String citizenCountry;
   String birthday;
-  Passport passport;
-  BirthCertificate birthCertificate;
+  Passport? passport;
+  BirthCertificate? birthCertificate;
   String address;
   String snils;
   String phoneNumber;
   String email;
+  int? id;
 
 
   Child(
@@ -31,7 +32,10 @@ class Child {
       this.address,
       this.snils,
       this.phoneNumber,
-      this.email);
+      this.email,
+      this.id);
+
+  String get fio => "$secondName $firstName $lastName";
 
   factory Child.fromJson(Map<String, dynamic> json) => _$ChildFromJson(json);
 

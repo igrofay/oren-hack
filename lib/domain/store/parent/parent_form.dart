@@ -2,6 +2,11 @@
 
 import 'package:dooking/data/models/parent.dart';
 import 'package:dooking/data/models/passport.dart';
+<<<<<<< HEAD:lib/domain/store/profile_parent/parent_form.dart
+=======
+import 'package:dooking/domain/model/user_state_app.dart';
+import 'package:dooking/domain/store/app/core_app.dart';
+>>>>>>> 9950cf6f011808b0db48e59589a565c687a9d6a4:lib/domain/store/parent/parent_form.dart
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -36,14 +41,14 @@ abstract class _ParentForm with Store{
        numberPassport = parentInfo.passport.number.toString();
        dateOfGettingPassport = parentInfo.passport.dateOfGetting;
        issueName = parentInfo.passport.issueName;
-       print(parentInfo.passport.issueName);
        snils = parentInfo.snils;
-       print(parentInfo.snils);
        address = parentInfo.address;
        state = StateParentForm.success;
        email = parentInfo.email;
      }catch(_){}
-    state = StateParentForm.success;
+     if(getIt.get<CoreApp>().userStateApp == UserStateApp.parent){
+       state = StateParentForm.success;
+     }
   }
 
   String email = "";
