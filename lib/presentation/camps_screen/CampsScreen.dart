@@ -5,6 +5,75 @@ import 'package:dooking/res/theme/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+
+class Camp {
+  int? id;
+  String name;
+  String description;
+  String season;
+  String type;
+  String phone;
+  String address;
+  String space;
+  String corupuses;
+  String dayOfStart;
+  String dayOfEnd;
+  int? status;
+  String image;
+  String price;
+
+  Camp(
+      this.address,
+      this.corupuses,
+      this.dayOfEnd,
+      this.dayOfStart,
+      this.description,
+      this.id,
+      this.name,
+      this.phone,
+      this.season,
+      this.space,
+      this.status,
+      this.type,
+      this.image,
+      this.price);
+}
+
+List<Camp> camps = [
+  Camp(
+      "адрес",
+      "21",
+      "13.32.1343",
+      "31.34.3132",
+      "Лагерь находится в ведении Дирекции социальной сферы Куйбышевской железной дороги - филиала ОАО РЖД. На отдых во время летних школьных каникул принимаются дети и подростки. На территории лагеря имеются столовая на 150 мест, современный медпункт, комнаты кружковой работы, бытовые комнаты, библиотека, беседки отрядных сборов. Также имеются танцевальная и спортивные площадки, карусели.",
+      0,
+      "Орленок",
+      "(846)303-24-45",
+      "• Зимний сезон",
+      "2324",
+      1,
+      "тип",
+      "assets/sam.jpg",
+      "10000 рублей"),
+  Camp(
+      "адрес",
+      "21",
+      "13.32.1343",
+      "31.34.3132",
+      "Лагерь находится в ведении Дирекции социальной сферы Куйбышевской железной дороги - филиала ОАО РЖД. На отдых во время летних школьных каникул принимаются дети и подростки. На территории лагеря имеются столовая на 150 мест, современный медпункт, комнаты кружковой работы, бытовые комнаты, библиотека, беседки отрядных сборов. Также имеются танцевальная и спортивные площадки, карусели.",
+      0,
+      "Орленок",
+      "(846)303-24-45",
+      "• Зимний сезон",
+      "2324",
+      1,
+      "тип",
+      "assets/orl.jpg",
+      "10000 рублей"),
+];
+
+int current = 0;
 
 class CampsScreen extends StatelessWidget {
   const CampsScreen({super.key});
@@ -37,12 +106,10 @@ class CampsScreen extends StatelessWidget {
             childAspectRatio: 2,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              card(),
-              card(),
-              card(),
-              card(),
-              card(),
-              card(),
+              ...List.generate(
+                  camps.length,
+                  (index) => card(camps[index].name, camps[index].description,
+                      index, camps[index].image, context))
             ],
           )
         ],
@@ -50,10 +117,16 @@ class CampsScreen extends StatelessWidget {
     ));
   }
 
-  Widget card() {
+  Widget card(
+      String name, String desc, int id, String image, BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        current = id;
+        context.go("/detailedCampScreen");
+      },
       child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(30)),
         child: Flex(
           direction: Axis.horizontal,
           children: [
@@ -63,7 +136,7 @@ class CampsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     image: DecorationImage(
-                      image: AssetImage("assets/asset.png"),
+                      image: AssetImage(image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -76,13 +149,17 @@ class CampsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Название лагеря",
+                      name,
                       style: defaultTextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    Text(
-                      "Самый крутой крутой крутой rhenjq rhnjq njnklefjn крутой",
-                      style: defaultTextStyle(color: Colors.black),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Text(
+                        desc,
+                        style: defaultTextStyle(color: Colors.black),
+                        maxLines: 6,
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -101,8 +178,6 @@ class CampsScreen extends StatelessWidget {
                 ))
           ],
         ),
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(30)),
       ),
     );
   }
