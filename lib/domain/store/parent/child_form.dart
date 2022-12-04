@@ -94,16 +94,13 @@ abstract class _ChildForm with Store{
   @action
   Future<void> save() async {
     final fioSplit = fio.split(' ');
-    print('1');
     if(fioSplit.length != 3){
       isErrorFIO = true;
       return;
     }
-    print('2');
     if(child != null){
 
     }else{
-      print('3');
       Passport? passport = isPassport
           ? Passport(int.parse(series), int.parse(number), dateOfGetting, issueName, true)
           : null;
