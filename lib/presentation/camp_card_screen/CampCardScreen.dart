@@ -2,13 +2,16 @@ import 'package:dooking/presentation/custom_widgets/CustomButton.dart';
 import 'package:dooking/presentation/custom_widgets/CustomDropdown.dart';
 import 'package:dooking/presentation/custom_widgets/CustomTextField.dart';
 import 'package:dooking/presentation/custom_widgets/Title.dart';
+import 'package:dooking/presentation/custom_widgets/dateField.dart';
 import 'package:dooking/presentation/utils/Background.dart';
 import 'package:dooking/res/constants.dart';
 import 'package:dooking/res/images.dart';
 import 'package:dooking/res/theme/colors.dart';
 import 'package:dooking/res/theme/typography.dart';
+import 'package:dooking/res/utils/formatters/NumberTextInputFormatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:injectable/injectable.dart';
@@ -61,13 +64,26 @@ class CampCardScreen extends StatelessWidget {
                       DropdownMenuItemData(value: "value", name: "value")
                     ], onChanged: (_) {}, value: "value"),
                     kDefaultVerticalPadding,
-                    CustomTextField(hintText: "Телефон для справок"),
+                    CustomTextField(
+                      hintText: "Телефон для справок",
+                      inputFormatters: [NumberTextInputFormatter()],
+                    ),
                     kDefaultVerticalPadding,
                     CustomTextField(hintText: "Адрес"),
                     kDefaultVerticalPadding,
-                    CustomTextField(hintText: "Площадь"),
+                    CustomTextField(
+                      hintText: "Площадь(м²)",
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                    ),
                     kDefaultVerticalPadding,
-                    CustomTextField(hintText: "Кол-во корпусов"),
+                    CustomTextField(
+                      hintText: "Кол-во корпусов",
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                    ),
                     kDefaultVerticalPadding,
                     kDefaultVerticalPadding,
                     HeaderTitle("Сроки посещения"),
@@ -78,10 +94,7 @@ class CampCardScreen extends StatelessWidget {
                                 children: [
                                   Stack(
                                     children: [
-                                      CustomTextField(
-                                        hintText: "Дата рождения",
-                                        readObly: true,
-                                      ),
+                                      dateField("Начало - Конец", ""),
                                       Positioned(
                                           top: 0,
                                           bottom: 0,
@@ -130,6 +143,9 @@ class CampCardScreen extends StatelessWidget {
       height: visible ? null : 0,
       child: SfDateRangePicker(
         selectionColor: Colors.amber,
+        rangeSelectionColor: Colors.amber.withAlpha(100),
+        startRangeSelectionColor: Colors.amber,
+        endRangeSelectionColor: Colors.amber,
         todayHighlightColor: Colors.transparent,
         monthCellStyle: const DateRangePickerMonthCellStyle(
             todayTextStyle: TextStyle(color: Colors.white70),

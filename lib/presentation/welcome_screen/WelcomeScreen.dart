@@ -18,10 +18,12 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return BackgroundScaffold(child: Stack(
+    return BackgroundScaffold(
+        child: Stack(
       children: [
-        Header(coreApp: coreApp,),
+        Header(
+          coreApp: coreApp,
+        ),
         Row(
           children: [
             const Spacer(),
@@ -32,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   "Счастливый билет",
                   style:
-                  defaultTextStyle(size: 40, fontWeight: FontWeight.bold),
+                      defaultTextStyle(size: 40, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Это портал бронирования места в лагере\nдля детей в любой лагерь страны",
@@ -92,9 +94,7 @@ class WelcomeScreen extends StatelessWidget {
 
 class Header extends StatelessWidget {
   final CoreApp coreApp;
-  const Header({
-    Key? key, required this.coreApp
-  }) : super(key: key);
+  const Header({Key? key, required this.coreApp}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,11 +103,7 @@ class Header extends StatelessWidget {
           const EdgeInsets.symmetric(vertical: kDefaultVerticalPaddingValue),
       height: HEIGHT,
       child: Stack(
-        children: [
-          sun(),
-          nav(context),
-          reg(context)
-        ],
+        children: [sun(), nav(context), reg(context)],
       ),
     );
   }
@@ -162,7 +158,7 @@ class Header extends StatelessWidget {
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed:  ()=> context.push('/loginScreen'),
+              onPressed: () => context.push('/loginScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Профиль", style: defaultTextStyle())),
