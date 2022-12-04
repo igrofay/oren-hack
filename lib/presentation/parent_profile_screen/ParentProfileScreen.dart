@@ -61,8 +61,15 @@ class ParentProfileScreen extends StatelessWidget {
             children: [
               HeaderTitle("Адрес"),
               CustomTextField(
+<<<<<<< HEAD
                 hintText: "Место жительства",
                 onChanged: (value) => parentForm.address = value,
+=======
+                  hintText: "Место жительства",
+                onChanged: (value)=> parentForm.address = value,
+                isError: parentForm.isErrorAddress,
+                text: parentForm.address,
+>>>>>>> 2f86b93404ac122875033d1237efc5c478388831
               ),
               kDefaultVerticalPadding,
               LayoutBuilder(builder: (_, con) {
@@ -98,12 +105,21 @@ class ParentProfileScreen extends StatelessWidget {
             hintText: "Серия паспорта",
             onChanged: (value) => parentForm.seriesPassport = value,
             isError: parentForm.isErrorSeriesPassport,
+            text: parentForm.seriesPassport,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
+<<<<<<< HEAD
               hintText: "Номер паспорта",
               onChanged: (value) => parentForm.numberPassport = value,
               isError: parentForm.isErrorNumberPassport),
+=======
+            hintText: "Номер паспорта",
+            onChanged: (value)=> parentForm.numberPassport = value,
+              isError: parentForm.isErrorNumberPassport,
+            text: parentForm.numberPassport,
+          ),
+>>>>>>> 2f86b93404ac122875033d1237efc5c478388831
           kDefaultVerticalPadding,
           Stack(
             children: [
@@ -143,12 +159,24 @@ class ParentProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Кем выдан",
+<<<<<<< HEAD
             onChanged: (value) => parentForm.issueName,
+=======
+            onChanged: (value)=> parentForm.issueName = value,
+            text:  parentForm.issueName,
+            isError:  parentForm.isErrorIssueName,
+>>>>>>> 2f86b93404ac122875033d1237efc5c478388831
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
+<<<<<<< HEAD
             onChanged: (value) => parentForm.snils,
+=======
+            onChanged: (value)=> parentForm.snils = value,
+            text:parentForm.snils,
+            isError:  parentForm.isErrorSnils,
+>>>>>>> 2f86b93404ac122875033d1237efc5c478388831
           ),
         ],
       ),
@@ -172,6 +200,7 @@ class ParentProfileScreen extends StatelessWidget {
             hintText: "ФИО",
             onChanged: (value) => parentForm.fio = value,
             isError: parentForm.isErrorAddress,
+            text: parentForm.fio,
           ),
           kDefaultVerticalPadding,
           CustomDropdown(
@@ -190,6 +219,8 @@ class ParentProfileScreen extends StatelessWidget {
           CustomTextField(
             hintText: "Гражданство",
             onChanged: (value) => parentForm.citizenCountry = value,
+            isError:parentForm.isErrorCitizenCountry,
+            text: parentForm.citizenCountry,
           ),
           kDefaultVerticalPadding,
           Stack(
@@ -227,6 +258,7 @@ class ParentProfileScreen extends StatelessWidget {
             hintText: "Номер телефона",
             onChanged: (value) => parentForm.phoneNumber = value,
             isError: parentForm.isErrorPhoneNumber,
+            text:parentForm.phoneNumber,
           )
         ],
       ),
