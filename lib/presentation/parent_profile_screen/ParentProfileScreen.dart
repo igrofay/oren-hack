@@ -17,7 +17,8 @@ import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../../domain/store/profile_parent/parent_form.dart';
+import '../../domain/store/parent/parent_form.dart';
+
 
 class ParentProfileScreen extends StatelessWidget {
   final ParentForm parentForm;

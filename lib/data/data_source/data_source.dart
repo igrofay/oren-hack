@@ -17,19 +17,27 @@ class DataSource{
         InterceptorsWrapper(
           onRequest:(options, handler){
             options.headers[HttpHeaders.authorizationHeader] = "Bearer ${getAccessToken()}";
-            print("-----");
+            print("-----onRequest");
             print("> ${options.uri}");
             print("> ${options.method}");
             print("> ${options.data}");
-            print("-----");
+            print("-----onRequest");
             return handler.next(options);
           },
           onError: (dioError, handler){
-            print("-----");
+            print("-----onError");
             print("> ${dioError.response?.requestOptions.uri}");
             print("> ${dioError.response?.statusCode}");
-            print("-----");
+            print("-----onError");
             return  handler.next(dioError);//continue
+          },
+          onResponse: (response, handler){
+            print("-----onResponse");
+            print("> ${response.requestOptions.uri}");
+            print("> ${response.statusCode}");
+            print("> ${response.data}");
+            print("-----onResponse");
+            handler.next(response);
           }
       )
     );

@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                   width: HEIGHT * 5,
                   height: HEIGHT,
                   child: ElevatedButton(
-                      onPressed: () => context.go("/registrationScreen"),
+                      onPressed: () => context.push("/registrationScreen"),
                       style: ElevatedButton.styleFrom(
                           elevation: 8,
                           backgroundColor: Colors.white,
@@ -61,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
                   width: HEIGHT * 5,
                   height: HEIGHT,
                   child: ElevatedButton(
-                      onPressed: () => context.go("/camps"),
+                      onPressed: () => context.push("/camps"),
                       style: ElevatedButton.styleFrom(
                           elevation: 0,
                           backgroundColor: Colors.transparent,
@@ -122,7 +122,7 @@ class Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CupertinoButton(
-            onPressed: () => context.go("/registrationScreen"),
+            onPressed: () => context.push("/registrationScreen"),
             padding: EdgeInsets.zero,
             minSize: 0,
             child: Text(
@@ -132,7 +132,7 @@ class Header extends StatelessWidget {
           ),
           CupertinoButton(
             padding: EdgeInsets.zero,
-            onPressed: () => context.go("/loginScreen"),
+            onPressed: () => context.push("/loginScreen"),
             minSize: 0,
             child: Text(
               "Или войдите в аккаунт",
@@ -156,13 +156,13 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CupertinoButton(
-              onPressed: () => context.go("/camps"),
+              onPressed: () => context.push("/camps"),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Лагеря", style: defaultTextStyle())),
           kDefaultHorizontalPadding,
           CupertinoButton(
-              onPressed:  ()=> context.go('/loginScreen'),
+              onPressed:  ()=> context.push('/loginScreen'),
               minSize: 0,
               padding: EdgeInsets.zero,
               child: Text("Профиль", style: defaultTextStyle())),

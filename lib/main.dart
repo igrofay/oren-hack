@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/childListScreen',
         builder: (BuildContext context, GoRouterState state) {
-          return ChildListScreen();
+          return ChildListScreen(childrenParent: getIt.get(),);
         },
       ),
       GoRoute(

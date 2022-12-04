@@ -1,6 +1,7 @@
 
 
 import 'package:dio/dio.dart';
+import 'package:dooking/data/models/child.dart';
 import 'package:dooking/data/models/parent.dart';
 import 'package:injectable/injectable.dart';
 
@@ -21,6 +22,11 @@ class ParentReposImpl implements ParentRepos{
   @override
   Future<void> saveParent(Parent parent) async {
     await _restClient.saveParentProfile(parent);
+  }
+
+  @override
+  Future<List<Child>> getChildList() async {
+    return await _restClient.getChildList();
   }
 
 

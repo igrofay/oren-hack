@@ -11,12 +11,13 @@ import 'package:dooking/data/data_source/rest_client.dart' as _i9;
 import 'package:dooking/data/repos/auth_impl.dart' as _i11;
 import 'package:dooking/data/repos/parent_impl.dart' as _i13;
 import 'package:dooking/data/repos/token_impl.dart' as _i7;
-import 'package:dooking/di/register_module_data_source.dart' as _i18;
+import 'package:dooking/di/register_module_data_source.dart' as _i19;
 import 'package:dooking/domain/repos/auth.dart' as _i10;
 import 'package:dooking/domain/repos/parent.dart' as _i12;
 import 'package:dooking/domain/repos/token.dart' as _i6;
 import 'package:dooking/domain/store/app/core_app.dart' as _i3;
-import 'package:dooking/domain/store/profile_parent/parent_form.dart' as _i17;
+import 'package:dooking/domain/store/parent/children_parent.dart' as _i17;
+import 'package:dooking/domain/store/parent/parent_form.dart' as _i18;
 import 'package:dooking/domain/store/session/sign_in.dart' as _i15;
 import 'package:dooking/domain/store/session/sign_up.dart' as _i16;
 import 'package:dooking/domain/use_case/restore_session.dart' as _i14;
@@ -73,9 +74,11 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i6.TokenRepos>(),
           gh<_i3.CoreApp>(),
         ));
-    gh.factory<_i17.ParentForm>(() => _i17.ParentForm(gh<_i12.ParentRepos>()));
+    gh.factory<_i17.ChildrenParent>(
+        () => _i17.ChildrenParent(gh<_i12.ParentRepos>()));
+    gh.factory<_i18.ParentForm>(() => _i18.ParentForm(gh<_i12.ParentRepos>()));
     return this;
   }
 }
 
-class _$RegModuleDataSource extends _i18.RegModuleDataSource {}
+class _$RegModuleDataSource extends _i19.RegModuleDataSource {}
