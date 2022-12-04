@@ -98,7 +98,6 @@ class ChildProfileScreen extends StatelessWidget {
                   onChanged: (v) {
                 if(v == "Паспорт") {
                   runInAction(() => childForm.isPassport = true);
-
                 } else {
                   runInAction(() => childForm.isPassport = false);
                 }},
@@ -124,41 +123,58 @@ class ChildProfileScreen extends StatelessWidget {
             height: true ? null : 0,
             child: CustomTextField(
               hintText: "Номер паспорта",
+              text: childForm.number,
+              onChanged: (v) =>  childForm.number = v,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
               ],
             ),
           ),
           kDefaultVerticalPadding,
-          Stack(
-            children: [
-              dateField("Дата выдачи", ""),
-              Positioned(
-                  top: 0,
-                  bottom: 0,
-                  right: 16,
-                  child: AnimatedRotation(
-                    duration: const Duration(milliseconds: 300),
-                    turns: false ? 1 : 0.5,
-                    child: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.white,
-                    ),
+          Observer(
+            builder: (context) {
+              return Stack(
+                children: [
+                  dateField("Дата выдачи", childForm.dateOfGetting),
+                  Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 16,
+                      child: AnimatedRotation(
+                        duration: const Duration(milliseconds: 300),
+                        turns: childForm.showCalendarDateOfGetting ? 1 : 0.5,
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                        ),
+                      )),
+                  Positioned.fill(
+                      child: GestureDetector(
+                    onTap: () =>
+                        runInAction(() => childForm.showCalendarDateOfGetting = !childForm.showCalendarDateOfGetting)
                   )),
-              Positioned.fill(
-                  child: GestureDetector(
-                onTap: () => print("lllla"),
-              )),
-            ],
+                ],
+              );
+            }
           ),
-          calendar(true, (_) {}),
+          Observer(
+            builder: (context) {
+              return calendar(childForm.showCalendarDateOfGetting, (v) {
+                runInAction(() => childForm.dateOfGetting = v.value.toString().substring(0,10));
+              });
+            }
+          ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Кем выдан",
+            text: childForm.issueName,
+            onChanged: (v)=> childForm.issueName= v,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Снилс",
+            text: childForm.snils,
+            onChanged: (v)=> childForm.snils = v,
             inputFormatters: [
               FromSampleFormatter(
                   sample: "XXX XXX XXX XX", seperator: " ", isDigits: true)
