@@ -1,8 +1,10 @@
 
 
 import 'package:dooking/data/models/child.dart';
+import 'package:dooking/data/models/passport.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../data/models/birth_certificate.dart';
 import '../../repos/parent.dart';
 
 part 'child_form.g.dart';
@@ -99,8 +101,14 @@ abstract class _ChildForm with Store{
     if(child != null){
 
     }else{
+      Passport? passport = isPassport
+          ? Passport(int.parse(series), int.parse(number), dateOfGetting, issueName, true)
+          : null;
+      BirthCertificate? cer = isPassport ? null
+          : BirthCertificate(true, series, int.parse(number), dateOfGetting, issueName);
       child = Child(fio[1], fio[0], fio[2], citizenCountry, birthday,
-          null, null,
+          passport,
+          cer,
           address, snils, phoneNumber, email, null
       );
       child?.id = await _parentRepos.putNewChild(child!);

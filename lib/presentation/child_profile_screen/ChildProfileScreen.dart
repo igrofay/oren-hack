@@ -16,9 +16,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobx/mobx.dart';
+
+import '../../domain/store/parent/child_form.dart';
 
 class ChildProfileScreen extends StatelessWidget {
-  const ChildProfileScreen({super.key});
+  final ChildForm childForm;
+  const ChildProfileScreen({super.key, required this.childForm});
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +62,10 @@ class ChildProfileScreen extends StatelessWidget {
                 return SizedBox(
                   width: con.maxWidth / 2,
                   child: CustomButton(
-                    text: "Продолжить",
+                    text: "Добавать",
                     textColor: primary,
                     buttonColor: Colors.white,
-                    onPressed: () {},
+                    onPressed: childForm.save,
                   ),
                 );
               })
@@ -88,7 +92,8 @@ class ChildProfileScreen extends StatelessWidget {
             DropdownMenuItemData(
                 name: "Свидетельсво о рождении",
                 value: "Свидетельсво о рождении")
-          ], onChanged: (_) {}, value: "Паспорт"),
+          ],
+              onChanged: (_) { }, value: "Паспорт"),
           if (true) kDefaultVerticalPadding,
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
@@ -114,9 +119,7 @@ class ChildProfileScreen extends StatelessWidget {
           kDefaultVerticalPadding,
           Stack(
             children: [
-              Observer(builder: (context) {
-                return dateField("Дата выдачи", "");
-              }),
+              dateField("Дата выдачи", ""),
               Positioned(
                   top: 0,
                   bottom: 0,
@@ -168,39 +171,55 @@ class ChildProfileScreen extends StatelessWidget {
           }),
           CustomTextField(
             hintText: "ФИО",
+            text: childForm.fio,
+            onChanged: (v)=> childForm.fio= v,
+            isError: childForm.isErrorFIO,
           ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Гражданство",
+            text: childForm.citizenCountry,
+            onChanged: (v)=> childForm.citizenCountry = v,
+            isError: childForm.isErrorCitizenCountry,
           ),
           kDefaultVerticalPadding,
-          Stack(
-            children: [
-              Observer(builder: (context) {
-                return dateField("Дата рождения", "");
-              }),
-              Positioned(
-                  top: 0,
-                  bottom: 0,
-                  right: 16,
-                  child: AnimatedRotation(
-                    duration: const Duration(milliseconds: 300),
-                    turns: false ? 1 : 0.5,
-                    child: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.white,
-                    ),
+          Observer(
+            builder: (context) {
+              return Stack(
+                children: [
+                  dateField("Дата рождения", childForm.birthday),
+                  Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 16,
+                      child: AnimatedRotation(
+                        duration: const Duration(milliseconds: 300),
+                        turns: childForm.showCalendarBirthday ? 1 : 0.5,
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                        ),
+                      )),
+                  Positioned.fill(
+                      child: GestureDetector(
+                    onTap: () => runInAction(() => childForm.showCalendarBirthday = ! childForm.showCalendarBirthday),
                   )),
-              Positioned.fill(
-                  child: GestureDetector(
-                onTap: () => print("lllla"),
-              )),
-            ],
+                ],
+              );
+            }
           ),
-          calendar(true, (_) {}),
+          Observer(
+            builder: (context) {
+              return calendar(childForm.showCalendarBirthday, (v) {
+                runInAction(() => childForm.birthday = v.value.toString().substring(0,10));
+              });
+            }
+          ),
           kDefaultVerticalPadding,
           CustomTextField(
             hintText: "Номер телефона",
+            text: childForm.phoneNumber,
+            onChanged: (v) => childForm.phoneNumber = v,
             inputFormatters: [NumberTextInputFormatter()],
           )
         ],

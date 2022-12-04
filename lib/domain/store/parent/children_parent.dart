@@ -41,6 +41,7 @@ abstract class _ChildrenParent with Store{
   @action
   void addChild(){
     if(getIt.get<CoreApp>().userStateApp == UserStateApp.parent){
+      childForm = ChildForm(null, _parentRepos);
       stateChildrenParent = StateChildrenParent.inputForm;
     }
   }
