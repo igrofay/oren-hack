@@ -22,7 +22,6 @@ Child _$ChildFromJson(Map<String, dynamic> json) => Child(
       json['address'] as String,
       json['snils'] as String,
       json['phoneNumber'] as String,
-      json['email'] as String,
       json['id'] as int?,
     );
 
@@ -37,6 +36,5 @@ Map<String, dynamic> _$ChildToJson(Child instance) => <String, dynamic>{
       'address': instance.address,
       'snils': instance.snils,
       'phoneNumber': instance.phoneNumber,
-      'email': instance.email,
       'id': instance.id,
     };

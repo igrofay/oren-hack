@@ -94,22 +94,25 @@ abstract class _ChildForm with Store{
   @action
   Future<void> save() async {
     final fioSplit = fio.split(' ');
-    if(fioSplit.length == 3){
+    print('1');
+    if(fioSplit.length != 3){
       isErrorFIO = true;
       return;
     }
+    print('2');
     if(child != null){
 
     }else{
+      print('3');
       Passport? passport = isPassport
           ? Passport(int.parse(series), int.parse(number), dateOfGetting, issueName, true)
           : null;
       BirthCertificate? cer = isPassport ? null
           : BirthCertificate(true, series, int.parse(number), dateOfGetting, issueName);
-      child = Child(fio[1], fio[0], fio[2], citizenCountry, birthday,
+      child = Child(fioSplit[1], fioSplit[0], fioSplit[2], citizenCountry, birthday,
           passport,
           cer,
-          address, snils, phoneNumber, email, null
+          address, snils, phoneNumber, null
       );
       child?.id = await _parentRepos.putNewChild(child!);
     }

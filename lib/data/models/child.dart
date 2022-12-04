@@ -17,7 +17,6 @@ class Child {
   String address;
   String snils;
   String phoneNumber;
-  String email;
   int? id;
 
 
@@ -32,7 +31,6 @@ class Child {
       this.address,
       this.snils,
       this.phoneNumber,
-      this.email,
       this.id);
 
   String get fio => "$secondName $firstName $lastName";
